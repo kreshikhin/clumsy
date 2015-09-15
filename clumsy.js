@@ -139,7 +139,10 @@ function Clumsy(canvas){
                 point.y + 0.5 * tick_size * point.normal.y);
             ctx.stroke();
 
-            ctx.fillText(point.mark, point.x, point.y);
+            self.drawText(point.mark,
+                point.x + tick_size * point.normal.x,
+                point.y + tick_size * point.normal.y,
+                point.normal);
         }
 
         return last;
@@ -261,7 +264,7 @@ function Clumsy(canvas){
                 line.push({
                     x: zero.x + dir.x*t,
                     y: zero.y + dir.y*t,
-                    normal: {x: dir.y, y: -dir.x},
+                    normal: {x: -dir.y, y: dir.x},
                     mark: mark(t),
                     style: opts.style,
                     tick_size: opts.tick_size || 5
@@ -281,7 +284,26 @@ function Clumsy(canvas){
 
         self.draw(line);
 
-    }
+    };
+
+    self.drawText = function(text, x, y, align){
+        var ctx = self.ctx;
+        var m = ctx.measureText(text);
+
+        if(align === 'center'){
+            ctx.fillText(text, x - m.width / 2, y);
+            return;
+        }
+        if(isSet(align) && isNumber(align.x) && isNumber(align.y)){
+            //console.log(align.y * m.actualBoundingBoxAscent);
+            ctx.fillText(text,
+                x + (-1 + align.x) * m.width / 2,
+                y + (1 + align.y) * m.actualBoundingBoxAscent / 2);
+            return;
+        }
+
+        ctx.fillText(text, x, y);
+    };
 };
 
 module.exports = Clumsy;

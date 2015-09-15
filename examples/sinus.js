@@ -24,9 +24,11 @@ clumsy.drawAxis('x', 0, 2 * Math.PI, {
     tick_size: 5
 });
 
-clumsy.drawAxis('-y', -2, 2, {
+clumsy.drawAxis('y', -2, 2, {
     limits: [-1.5, 1.5],
     step: 0.5
 });
+
+clumsy.drawText('Hello World!!!', canvas.width/2, 50);
 
 clumsy.save();
