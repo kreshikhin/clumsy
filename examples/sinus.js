@@ -5,18 +5,28 @@ var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 
 clumsy.padding(100);
+clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 
-clumsy.range(0, 10, -2, 2);
+var sinus = [];
 
-//clumsy.addStyle('axis', {color: black, line: [5 15]})
+for(var t=0; t < 2*Math.PI; t += 0.01){
+    sinus.push({
+        x: t,
+        y: Math.sin(t)
+    });
+};
 
-clumsy.draw([{x: 0, y:0}, {x:10, y:0}], 10, 5);
-clumsy.draw([{x: 0, y:0}, {x:10, y:0}], 10, 5);
+clumsy.draw(sinus);
 
-//clumsy.drawText(100, 200, 'Hello World');
+clumsy.drawAxis('x', 0, 2 * Math.PI, {
+    limits: [0.5, 5.5],
+    step: 0.5,
+    tick_size: 5
+});
 
-//clumsy.draw('axis', '0 0; 100 100; 20 200');
-//clumsy.draw('axis', '0 0; 100 100');
-
+clumsy.drawAxis('-y', -2, 2, {
+    limits: [-1.5, 1.5],
+    step: 0.5
+});
 
 clumsy.save();
