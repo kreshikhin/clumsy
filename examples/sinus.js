@@ -29,6 +29,6 @@ clumsy.drawAxis('y', -2, 2, {
     step: 0.5
 });
 
-clumsy.drawText('Hello World!!!', canvas.width/2, 50);
+clumsy.drawText('Синус', canvas.width/2, 50);
 
 clumsy.save();
