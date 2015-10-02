@@ -89,7 +89,7 @@ function Clumsy(canvas){
             name = path.basename(process.argv[1], '.js') + '.png';
         }
 
-        var out = fs.createWriteStream(path.join(__dirname, name));
+        var out = fs.createWriteStream(path.join('./', name));
         self.canvas.pngStream().pipe(out);
     };
 
