@@ -294,4 +294,6 @@ function Clumsy(canvas){
     };
 };
 
-module && (module.exports = Clumsy);
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Clumsy;
+}
