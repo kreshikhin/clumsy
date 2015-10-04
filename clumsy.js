@@ -1,7 +1,4 @@
 
-var fs = require('fs');
-var path = require('path');
-
 function Clumsy(canvas){
     var self = this;
 
@@ -83,16 +80,7 @@ function Clumsy(canvas){
     self.scale_vertical = function(){
         return (self.canvas.height - self.padding_bottom - self.padding_top) / self.range_vertical();
     }
-
-    self.save = function(name){
-        if(name == undefined) {
-            name = path.basename(process.argv[1], '.js') + '.png';
-        }
-
-        var out = fs.createWriteStream(path.join('./', name));
-        self.canvas.pngStream().pipe(out);
-    };
-
+    
     self.draw = function(line){
         var step = self.step;
         var radius = self.radius;
