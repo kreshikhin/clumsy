@@ -21,6 +21,10 @@ function Clumsy(canvas){
         return (typeof object !== 'undefined');
     }
 
+    self.clear = function(){
+        ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
+    }
+
     self.padding = function(p0, p1, p2, p3){
         if(p1 === undefined){
             self.padding_left = p0;
@@ -86,9 +90,9 @@ function Clumsy(canvas){
         var radius = self.radius;
 
         var rescaledLine = self.rescale(line);
-        console.log(rescaledLine);
+        //console.log(rescaledLine);
         var replottedLine = self.replot(rescaledLine, step, radius);
-        console.log(replottedLine);
+        //console.log(replottedLine);
         //return;
 
         var ctx = self.ctx;
@@ -106,13 +110,13 @@ function Clumsy(canvas){
         }
 
         // curve through the last two points
-        console.log(replottedLine);
+        //console.log(replottedLine);
         ctx.quadraticCurveTo(replottedLine[i].x, replottedLine[i].y, replottedLine[i+1].x,replottedLine[i+1].y);
         ctx.stroke();
 
         var last = {x: replottedLine[i+1].x, y:replottedLine[i+1].y};
 
-        console.log(replottedLine.length);
+        //console.log(replottedLine.length);
         for(var i = 0; i < replottedLine.length; i++){
             var point = replottedLine[i];
 
