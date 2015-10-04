@@ -80,7 +80,7 @@ function Clumsy(canvas){
     self.scale_vertical = function(){
         return (self.canvas.height - self.padding_bottom - self.padding_top) / self.range_vertical();
     }
-    
+
     self.draw = function(line){
         var step = self.step;
         var radius = self.radius;
@@ -294,4 +294,4 @@ function Clumsy(canvas){
     };
 };
 
-module.exports = Clumsy;
+module && (module.exports = Clumsy);
