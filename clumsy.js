@@ -29,7 +29,7 @@ function Clumsy(canvas){
 
     self.clear = function(color){
         self.ctx.save();
-        seld.ctx.fillStyle = color || 'white';
+        self.ctx.fillStyle = color || 'white';
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
         self.ctx.restore();
     }
