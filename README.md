@@ -27,7 +27,6 @@ for(var t=0; t < 2*Math.PI; t += 0.01){
 };
 
 clumsy.draw(sinus);
-
 ```
 
 ## Drawing with axis

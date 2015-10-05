@@ -1,5 +1,9 @@
 
 function Clumsy(canvas){
+    if(!canvas){
+        throw('Canvas is required as first argument.')
+    }
+
     var self = this;
 
     self.canvas = canvas;
@@ -13,6 +17,8 @@ function Clumsy(canvas){
     self.step = 30;
     self.radius = 10;
 
+    self.defaultBoxAscent = 16;
+
     function isNumber(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
@@ -21,8 +27,11 @@ function Clumsy(canvas){
         return (typeof object !== 'undefined');
     }
 
-    self.clear = function(){
-        ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
+    self.clear = function(color){
+        self.ctx.save();
+        seld.ctx.fillStyle = color || 'white';
+        self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
+        self.ctx.restore();
     }
 
     self.padding = function(p0, p1, p2, p3){
@@ -281,6 +290,7 @@ function Clumsy(canvas){
     self.drawText = function(text, x, y, align){
         var ctx = self.ctx;
         var m = ctx.measureText(text);
+        m.actualBoundingBoxAscent = m.actualBoundingBoxAscent || self.defaultBoxAscent;
 
         if(align === 'center'){
             ctx.fillText(text, x - m.width / 2, y);

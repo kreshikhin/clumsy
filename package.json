@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "draws graphics and figures in xkcd style",
   "main": "clumsy.js",
+  "bin": {
+      "clumsy-serve" : "./clumsy-serve.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
