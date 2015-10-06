@@ -13,7 +13,7 @@ var canvas = new Canvas(600, 600);
 var clumsy = new Clumsy(canvas);
 clumsy.ctx.font = '12px VoronovFont';
 
-var encoder = helpers.prepare(GIFEncoder, canvas);
+var encoder = helpers.prepareEncoder(GIFEncoder, canvas);
 var phase = 0;
 var n = 10;
 

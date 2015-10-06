@@ -17,7 +17,7 @@ module.exports = {
             throw('First ans second arguments are required. Pass constructor of GIFEncoder as first, and instance of Canvas as second');
         };
 
-        var encoder = ctor(canvas.width, canvas.height);
+        var encoder = new ctor(canvas.width, canvas.height);
         encoder.createReadStream().pipe(
             fs.createWriteStream(
                 name || takeGifName()));
