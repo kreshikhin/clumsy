@@ -4,14 +4,17 @@
         <meta charset="utf-8">
         <title>spiral</title>
         <script type="text/javascript" src="https://rawgit.com/kreshikhin/clumsy/master/clumsy.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://webfonts.ru/import/voronov.css"></link>
     </head>
     <body>
-        <canvas id="canvas" width=800 height=600>
+        <canvas id="canvas" width=600 height=600>
     </body>
     <script type="text/javascript" src="spiral.js"></script>
     <script type="text/javascript">
         var canvas = document.getElementById('canvas');
         var clumsy = new Clumsy(canvas);
+
+        clumsy.ctx.font = '12px VoronovFont';
 
         var phase = 0;
 
@@ -21,7 +24,7 @@
             clumsy.clear('white');
             Spiral(clumsy, phase);
 
-            phase += Math.PI / 5;
-        }, 100);
+            phase += Math.PI / 10;
+        }, 50);
     </script>
 </html>

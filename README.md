@@ -3,6 +3,9 @@
 
 Clumsy.js is a library for creating math figures on HTMLCanvas in XKCD style.
 
+// "canvas": "*",
+// "gifencoder": "*",
+
 ## Preparing for drawing
 
 Before drawing it needs to create Canvas and pass this canvas to constructor of object Clumsy. By default clumsy object have padding in 100px and ranges [-1, 1] in both directions. This can be changed by special methods:
