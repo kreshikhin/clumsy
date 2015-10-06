@@ -210,8 +210,8 @@ function Clumsy(canvas){
 
         for(var i = 1; i < replottedLine.length; i++){
             var point = replottedLine[i];
-            replottedLine[i].x = point.x + radius * (Math.random() - 0.5);
-            replottedLine[i].y = point.y + radius * (Math.random() - 0.5);
+            replottedLine[i].x = point.x + radius * (self.random() - 0.5);
+            replottedLine[i].y = point.y + radius * (self.random() - 0.5);
         };
 
         return replottedLine;
@@ -306,6 +306,26 @@ function Clumsy(canvas){
 
         ctx.fillText(text, x, y);
     };
+
+    // random numbers
+    var m_w = 123456789;
+    var m_z = 987654321;
+    var mask = 0xffffffff;
+
+    // Takes any integer
+    self.seed = function(i){
+        m_w = i;
+    }
+
+    // Returns number between 0 (inclusive) and 1.0 (exclusive),
+    // just like Math.random().
+    self.random = random(){
+        m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
+        m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
+        var result = ((m_z << 16) + m_w) & mask;
+        result /= 4294967296;
+        return result + 0.5;
+    }
 };
 
 if (typeof module !== 'undefined' && module.exports) {

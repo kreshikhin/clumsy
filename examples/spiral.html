@@ -2,28 +2,24 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>clumsy</title>
+        <title>spiral</title>
         <script type="text/javascript" src="https://rawgit.com/kreshikhin/clumsy/master/clumsy.js"></script>
     </head>
     <body>
         <canvas id="canvas" width=800 height=600>
     </body>
-    <script type="text/javascript" src="sine.js"></script>
+    <script type="text/javascript" src="spiral.js"></script>
     <script type="text/javascript">
         var canvas = document.getElementById('canvas');
         var clumsy = new Clumsy(canvas);
 
-        function isNumber(n){
-            return !isNaN(parseFloat(n)) && isFinite(n);
-        }
-
-        function isSet(object){
-            return (typeof object !== 'undefined');
-        }
+        var phase = 0;
 
         setInterval(function(){
             clumsy.clear('white');
-            Sine(clumsy);
+            Spiral(clumsy, phase);
+
+            phase += Math.PI / 5;
         }, 100);
     </script>
 </html>
