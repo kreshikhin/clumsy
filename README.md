@@ -3,8 +3,11 @@
 
 Clumsy.js is a library for creating math figures on HTMLCanvas in XKCD style.
 
-// "canvas": "*",
-// "gifencoder": "*",
+This library can be used with Node.js libraries `canvas` and 'gifencoder`:
+
+```shell
+$ npm install canvas gifencoder
+```
 
 ## Preparing for drawing
 
