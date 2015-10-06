@@ -1,5 +1,6 @@
 
 var path = require('path');
+var fs = require('fs');
 
 var takeGifName = function(){
     return path.basename(process.argv[1], '.js').replace('-build', '') + '.gif';
