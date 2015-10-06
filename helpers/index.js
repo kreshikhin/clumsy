@@ -24,7 +24,7 @@ module.exports = {
 
         encoder.setRepeat(repeat || 0);   // 0 for repeat, -1 for no-repeat
         encoder.setDelay(delay || 50);  // frame delay in ms
-        encoder.setQuality(quality 10); // image quality. 10 is default.
+        encoder.setQuality(quality || 10); // image quality. 10 is default.
         return encoder;
     }
 }
