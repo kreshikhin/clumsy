@@ -16,6 +16,8 @@
         var phase = 0;
 
         setInterval(function(){
+            clumsy.seed(123);
+
             clumsy.clear('white');
             Spiral(clumsy, phase);
 

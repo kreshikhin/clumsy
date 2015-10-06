@@ -319,7 +319,7 @@ function Clumsy(canvas){
 
     // Returns number between 0 (inclusive) and 1.0 (exclusive),
     // just like Math.random().
-    self.random = random(){
+    self.random = function(){
         m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
         m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
         var result = ((m_z << 16) + m_w) & mask;
