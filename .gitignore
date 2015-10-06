@@ -3,3 +3,4 @@ node_modules
 todo.txt
 .DS_store
 *.log
+*.gif
