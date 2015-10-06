@@ -315,6 +315,7 @@ function Clumsy(canvas){
     // Takes any integer
     self.seed = function(i){
         m_w = i;
+        m_z = 987654321;
     }
 
     // Returns number between 0 (inclusive) and 1.0 (exclusive),
