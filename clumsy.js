@@ -94,7 +94,7 @@ function Clumsy(canvas){
         return (self.canvas.height - self.padding_bottom - self.padding_top) / self.range_vertical();
     }
 
-    self.draw = function(line){
+    self.draw = function(line, style){
         var step = self.step;
         var radius = self.radius;
 
@@ -102,6 +102,11 @@ function Clumsy(canvas){
 
         var rescaledLine = self.rescale(line);
         var replottedLine = self.replot(rescaledLine, step, radius);
+
+        if(style === 'broken'){
+            replottedLine = rescaledLine;
+        }
+
         var ctx = self.ctx;
 
         ctx.beginPath();
