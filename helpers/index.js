@@ -15,7 +15,7 @@ module.exports = {
     takePngName: takePngName,
     prepareEncoder: function(ctor, canvas, name, repeat, delay, quality){
         if(!ctor || !canvas){
-            throw('First ans second arguments are required. Pass constructor of GIFEncoder as first, and instance of Canvas as second');
+            throw('First and second arguments are required. Pass constructor of GIFEncoder as first, and instance of Canvas as second');
         };
 
         var encoder = new ctor(canvas.width, canvas.height);
@@ -27,5 +27,14 @@ module.exports = {
         encoder.setDelay(delay || 50);  // frame delay in ms
         encoder.setQuality(quality || 10); // image quality. 10 is default.
         return encoder;
+    },
+    saveAsPng: function(clumsy){
+        if(!clumsy){
+            throw('First argument are required. It must be instance of Clumsy');
+        };
+
+        var name = takePngName();
+        var out = fs.createWriteStream(path.join('./', name));
+        clumsy.canvas.pngStream().pipe(out);
     }
 }

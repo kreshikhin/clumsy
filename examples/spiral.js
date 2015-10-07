@@ -33,7 +33,7 @@ function Spiral(clumsy, phase){
         step: 0.5
     });
 
-    clumsy.drawText('Спираль', clumsy.canvas.width/2, 50);
+    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
 }
 
 if(typeof module != 'undefined' && module.exports){

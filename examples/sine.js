@@ -1,5 +1,6 @@
 
 function Sine(clumsy){
+    clumsy.ctx.font = '24px VoronovFont';
     clumsy.padding(100);
     clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 
@@ -27,7 +28,7 @@ function Sine(clumsy){
         step: 0.5
     });
 
-    clumsy.drawText('Sine', clumsy.canvas.width/2, 50);
+    clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
 }
 
 if(typeof module != 'undefined' && module.exports){

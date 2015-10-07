@@ -11,7 +11,7 @@ var Spiral = require('./spiral.js');
 
 var canvas = new Canvas(600, 600);
 var clumsy = new Clumsy(canvas);
-clumsy.ctx.font = '12px VoronovFont';
+clumsy.ctx.font = '24px VoronovFont';
 
 var encoder = helpers.prepareEncoder(GIFEncoder, canvas);
 var phase = 0;

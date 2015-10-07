@@ -18,7 +18,7 @@ clumsy.step = 1;
 var sine = [];
 
 for(var t=0; t < 2*Math.PI; t += 0.1){
-    sine.push({x: t, y: Math.sin(t), mark: ''});
+    sine.push({x: t, y: Math.sin(t)});
 };
 
 clumsy.draw(sine);
