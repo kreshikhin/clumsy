@@ -99,11 +99,7 @@ function Clumsy(canvas){
         var radius = self.radius;
 
         var rescaledLine = self.rescale(line);
-        //console.log(rescaledLine);
         var replottedLine = self.replot(rescaledLine, step, radius);
-        //console.log(replottedLine);
-        //return;
-
         var ctx = self.ctx;
 
         ctx.beginPath();

@@ -1,7 +1,5 @@
 
 function Sine(clumsy){
-    //clumsy.ctx.font = '10px Ubuntu Mono';
-
     clumsy.padding(100);
     clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 
