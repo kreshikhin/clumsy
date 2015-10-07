@@ -98,6 +98,8 @@ function Clumsy(canvas){
         var step = self.step;
         var radius = self.radius;
 
+        if(line.length < 2) return [];
+
         var rescaledLine = self.rescale(line);
         var replottedLine = self.replot(rescaledLine, step, radius);
         var ctx = self.ctx;
@@ -105,18 +107,21 @@ function Clumsy(canvas){
         ctx.beginPath();
         ctx.moveTo(replottedLine[0].x, replottedLine[0].y);
 
-        for(var i = 1; i < replottedLine.length - 2; i ++){
-            var point = replottedLine[i];
-            var nextPoint = replottedLine[i+1];
+        if(replottedLine.length > 2){
+            for(var i = 1; i < replottedLine.length - 2; i ++){
+                var point = replottedLine[i];
+                var nextPoint = replottedLine[i+1];
 
-            var xc = (point.x + nextPoint.x) / 2;
-            var yc = (point.y + nextPoint.y) / 2;
-            ctx.quadraticCurveTo(point.x, point.y, xc, yc);
+                var xc = (point.x + nextPoint.x) / 2;
+                var yc = (point.y + nextPoint.y) / 2;
+                ctx.quadraticCurveTo(point.x, point.y, xc, yc);
+            }
+
+            ctx.quadraticCurveTo(replottedLine[i].x, replottedLine[i].y, replottedLine[i+1].x,replottedLine[i+1].y);
+        }else{
+            ctx.lineTo(replottedLine[1].x, replottedLine[1].y);
         }
 
-        // curve through the last two points
-        //console.log(replottedLine);
-        ctx.quadraticCurveTo(replottedLine[i].x, replottedLine[i].y, replottedLine[i+1].x,replottedLine[i+1].y);
         ctx.stroke();
 
         var last = {x: replottedLine[i+1].x, y:replottedLine[i+1].y};
