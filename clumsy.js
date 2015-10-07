@@ -106,6 +106,7 @@ function Clumsy(canvas){
 
         ctx.beginPath();
         ctx.moveTo(replottedLine[0].x, replottedLine[0].y);
+        var last = replottedLine[0];
 
         if(replottedLine.length > 2){
             for(var i = 1; i < replottedLine.length - 2; i ++){
@@ -118,13 +119,14 @@ function Clumsy(canvas){
             }
 
             ctx.quadraticCurveTo(replottedLine[i].x, replottedLine[i].y, replottedLine[i+1].x,replottedLine[i+1].y);
+                    var last = {x: replottedLine[i+1].x, y:replottedLine[i+1].y};
+            last = replottedLine[i+1];
         }else{
             ctx.lineTo(replottedLine[1].x, replottedLine[1].y);
+            last = replottedLine[1];
         }
 
         ctx.stroke();
-
-        var last = {x: replottedLine[i+1].x, y:replottedLine[i+1].y};
 
         //console.log(replottedLine.length);
         for(var i = 0; i < replottedLine.length; i++){
