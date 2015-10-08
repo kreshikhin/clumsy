@@ -149,13 +149,16 @@ function Clumsy(canvas){
                 point.normal);
         }
 
-        /*
-var dir = { x: line[l].x - line[l-1].x, y: line[l].y - line[l-1].y};
-dir_length = Math.sqrt(dir.x*dir.x+dir.y*dir.y);
-dir = {x: dir.x / dir_length, y: dir.y / dir_length};
-        */
+        if(replottedLine.length >= 2){
+            var l = replottedLine.length - 1;
+            var p0 = replottedLine[l-1];
+            var p1 = replottedLine[l];
 
-        last.direction = {x: 1, y: 0};
+            var dir = { x: p1.x - p0.x, y: p1.y - p0.y};
+            dir_length = Math.sqrt(dir.x*dir.x+dir.y*dir.y);
+            last.direction = {x: dir.x / dir_length, y: dir.y / dir_length};
+        };
+
 
         return last;
     }
@@ -299,6 +302,8 @@ dir = {x: dir.x / dir_length, y: dir.y / dir_length};
     };
 
     self.drawArrow = function(point, direction){
+        if(!direction) return;
+        
         var ctx = self.ctx;
         var arrow_length = 10;
         var arrow_width = 5
