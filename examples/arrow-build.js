@@ -8,10 +8,10 @@ var helpers = require('../helpers');
 clumsy.ctx.font = '24px VoronovFont';
 
 clumsy.padding(100);
-clumsy.range(0, 2*Math.PI, -1.5, 1.5);
+clumsy.range(-3, 3, -1.5, 1.5);
 
-clumsy.drawAxis('x', 0, 2 * Math.PI, {
-    limits: [0.5, 5.5],
+clumsy.drawAxis('x', -2.5, 2.5, {
+    limits: [-2, 2],
     step: 0.5,
     tick_size: 5
 });

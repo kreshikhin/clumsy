@@ -269,6 +269,7 @@ function Clumsy(canvas){
         var line = [];
         var zero = opts.zero || {x: 0, y: 0};
         var limits = opts.limits || [t0, t1];
+        var hide_zero = opts.hide_zero || true;
 
         var mark = opts.mark || function(t){
             return parseInt(t) + '.' + parseInt(Math.abs(t*10) % 10)
@@ -276,6 +277,10 @@ function Clumsy(canvas){
 
         if(isSet(opts.step)){
             for(var t=limits[0]; t <= limits[1]; t += opts.step){
+                if(hide_zero && t === 0){
+                    continue;
+                };
+
                 line.push({
                     x: zero.x + dir.x*t,
                     y: zero.y + dir.y*t,
@@ -303,7 +308,7 @@ function Clumsy(canvas){
 
     self.drawArrow = function(point, direction){
         if(!direction) return;
-        
+
         var ctx = self.ctx;
         var arrow_length = 10;
         var arrow_width = 5
