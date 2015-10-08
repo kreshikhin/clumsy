@@ -149,6 +149,14 @@ function Clumsy(canvas){
                 point.normal);
         }
 
+        /*
+var dir = { x: line[l].x - line[l-1].x, y: line[l].y - line[l-1].y};
+dir_length = Math.sqrt(dir.x*dir.x+dir.y*dir.y);
+dir = {x: dir.x / dir_length, y: dir.y / dir_length};
+        */
+
+        last.direction = {x: 1, y: 0};
+
         return last;
     }
 
@@ -286,9 +294,31 @@ function Clumsy(canvas){
             y: zero.y + dir.y*t1
         });
 
-        self.draw(line);
-
+        var point = self.draw(line);
+        self.drawArrow(point, point.direction);
     };
+
+    self.drawArrow = function(point, direction){
+        var ctx = self.ctx;
+        var arrow_length = 10;
+        var arrow_width = 5
+
+        var normal = {x: direction.y, y: -direction.x};
+
+        var line = [
+            {x: point.x + arrow_width*normal.x - arrow_length*direction.x,
+            y: point.y + arrow_width*normal.y - arrow_length*direction.y},
+            {x: point.x, y: point.y},
+            {x: point.x - arrow_width*normal.x - arrow_length*direction.x,
+            y: point.y - arrow_width*normal.y - arrow_length*direction.y}
+        ];
+
+        ctx.beginPath();
+        ctx.moveTo(line[0].x, line[0].y);
+        ctx.lineTo(line[1].x, line[1].y);
+        ctx.lineTo(line[2].x, line[2].y);
+        ctx.stroke();
+    }
 
     self.drawText = function(text, x, y, align){
         var ctx = self.ctx;
