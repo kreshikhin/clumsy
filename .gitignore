@@ -4,3 +4,4 @@ todo.txt
 .DS_store
 *.log
 *.gif
+!readme-*.png
