@@ -167,11 +167,11 @@ if(typeof module != 'undefined' && module.exports){
 
 Preview sript for browser:
 ```html
-<document html>
+<!DOCTYPE html>
 <meta charset="utf-8">
 <title>spiral</title>
-<script type="text/javascript" src="https://rawgit.com/kreshikhin/clumsy/master/clumsy.js"></script>
-<link rel="stylesheet" type="text/css" href="http://webfonts.ru/import/voronov.css"></link>
+<script src="https://rawgit.com/kreshikhin/clumsy/master/clumsy.js"></script>
+<link rel="stylesheet" href="http://webfonts.ru/import/voronov.css"></link>
 <canvas id="canvas" width=600 height=600>
 <script type="text/javascript" src="spiral.js"></script>
 <script type="text/javascript">
@@ -228,8 +228,8 @@ encoder.finish();
 ```
 
 Result:
-![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral.gif)
 
+![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral.gif)
 
 ## License
 
