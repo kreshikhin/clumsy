@@ -70,7 +70,8 @@ Result:
 
 ![alt tag](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
-## Drawing with axis
+
+## Drawing a figure with scaled axis and title
 
 ```javascript
 var Canvas = require('canvas');
@@ -114,9 +115,9 @@ helpers.saveAsPng(clumsy);
 
 ```
 
-## Drawing a figure with scaled axis and title
+Result:
 
-## Using a custom font
+![alt tag](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
 ## Animation
 
