@@ -228,7 +228,7 @@ encoder.finish();
 ```
 
 Result:
-![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral)
+![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral.gif)
 
 
 ## License

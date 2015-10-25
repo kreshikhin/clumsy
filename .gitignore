@@ -5,3 +5,4 @@ todo.txt
 *.log
 *.gif
 !readme-*.png
+!spiral.gif
