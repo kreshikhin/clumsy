@@ -1,6 +1,11 @@
 
 # Clumsy
 
+  [![NPM Version][npm-image]][npm-url]
+  [![NPM Downloads][downloads-image]][downloads-url]
+  [![Build Status][travis-image]][travis-url]
+
+
 Clumsy.js is a library for creating math figures on HTMLCanvas in XKCD style.
 
 This library can be used with Node.js libraries `canvas` and `gifencoder`:
@@ -47,3 +52,14 @@ clumsy.drawAxis('y', -1, 1);
 ## Using a custom font
 
 ## Animation
+
+## License
+
+  [MIT](LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/clumsy.svg
+[npm-url]: https://npmjs.org/package/clumsy
+[downloads-image]: https://img.shields.io/npm/dm/clumsy.svg
+[downloads-url]: https://npmjs.org/package/clumsy
+[travis-image]: https://img.shields.io/travis/kreshikhin/clumsy/master.svg
+[travis-url]: https://travis-ci.org/kreshikhin/clumsy
