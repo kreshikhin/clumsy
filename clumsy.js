@@ -95,14 +95,12 @@ function Clumsy(canvas){
     }
 
     self.draw = function(line){
-        var step = self.step;
-        var radius = self.radius;
         var ctx = self.ctx;
 
         if(line.length < 2) return [];
 
         var rescaledLine = self.rescale(line);
-        var replottedLine = self.replot(rescaledLine, step, radius);
+        var replottedLine = self.replot(rescaledLine);
 
         ctx.beginPath();
         ctx.moveTo(replottedLine[0].x, replottedLine[0].y);
@@ -181,7 +179,10 @@ function Clumsy(canvas){
         return result;
     };
 
-    self.replot = function(line, step, radius){
+    self.replot = function(line){
+        var step = self.step;
+        var radius = self.radius;
+
         var accuracy = 0.25;
 
         if(line.length < 2) return [];
