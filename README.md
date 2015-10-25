@@ -31,14 +31,18 @@ clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 Pass arrays with points to method draw. Each point must consider x and y field, e.g. {x: 0, y: 0} - begin coordinate system.
 
 ```javascript
-var sinus = [];
+var sine = [];
 
 for(var t=0; t < 2*Math.PI; t += 0.01){
-    sinus.push({x: t, y: Math.sin(t) });
+    sine.push({x: t, y: Math.sin(t) });
 };
 
 clumsy.draw(sinus);
 ```
+
+Result:
+
+![alt tag](https://raw.github.com/kreshikhin/clumsy/master/examples/sine.png)
 
 ## Drawing with axis
 
