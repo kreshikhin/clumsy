@@ -68,7 +68,7 @@ helpers.saveAsPng(clumsy); // save as png of same name
 
 Result:
 
-![alt tag](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
+![sine](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
 
 ## Drawing a figure with scaled axis and title
@@ -102,8 +102,6 @@ clumsy.drawAxis('x', 0, 7, {
     tick_size: 5
 });
 
-clumsy.ctx.fillStyle = 'black';
-
 clumsy.drawAxis('y', -2, 2, {
     limits: [-1.5, 1.5],
     step: 0.5
@@ -117,9 +115,121 @@ helpers.saveAsPng(clumsy);
 
 Result:
 
-![alt tag](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
+![axis](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
 ## Animation
+
+This module also can be used for animation of figure. The best way is prepare a separate script with drawing function.
+The function must receive two arguments: a clumsy object and an animation param. So without any other dependencies this script can be used for rendering by both ways in a browser or  node.js
+
+Drawing script:
+
+```js
+
+function Spiral(clumsy, phase){
+    clumsy.padding(100);
+    clumsy.range(-2, 2, -2, 2);
+
+    clumsy.radius = 3;
+
+    var spiral = [];
+
+    for(var t=0; t < 3; t += 0.01){
+        var r = 0.5 * t;
+
+        var x = r * Math.cos(2 * Math.PI * t + phase);
+        var y = r * Math.sin(2 * Math.PI * t + phase);
+
+        spiral.push({x: x, y: y});
+    };
+
+    clumsy.draw(spiral);
+
+    clumsy.drawAxis('x', -2, 2, {
+        limits: [-1.5, 1.5],
+        step: 0.5,
+        tick_size: 5
+    });
+
+    clumsy.drawAxis('y', -2, 2, {
+        limits: [-1.5, 1.5],
+        step: 0.5
+    });
+
+    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
+}
+
+if(typeof module != 'undefined' && module.exports){
+    module.exports = Spiral;
+}
+
+```
+
+Preview sript for browser:
+```html
+<document html>
+<meta charset="utf-8">
+<title>spiral</title>
+<script type="text/javascript" src="https://rawgit.com/kreshikhin/clumsy/master/clumsy.js"></script>
+<link rel="stylesheet" type="text/css" href="http://webfonts.ru/import/voronov.css"></link>
+<canvas id="canvas" width=600 height=600>
+<script type="text/javascript" src="spiral.js"></script>
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var clumsy = new Clumsy(canvas);
+    clumsy.ctx.font = '12px VoronovFont';
+
+    var phase = 0;
+    setInterval(function(){
+        clumsy.seed(123);
+
+        clumsy.clear('white');
+        Spiral(clumsy, phase);
+
+        phase += Math.PI / 10;
+    }, 50);
+</script>
+```
+
+Building script for node.js:
+
+```js
+
+var Canvas = require('canvas');
+var GIFEncoder = require('gifencoder');
+var path = require('path');
+var fs = require('fs');
+
+var Clumsy = require('clumsy');
+var helpers = require('clumsy/helpers');
+
+var Spiral = require('./spiral.js');
+
+var canvas = new Canvas(600, 600);
+var clumsy = new Clumsy(canvas);
+clumsy.ctx.font = '24px VoronovFont';
+
+var encoder = helpers.prepareEncoder(GIFEncoder, canvas);
+var phase = 0;
+var n = 10;
+
+encoder.start();
+for(var i = 0; i < n; i++){
+    clumsy.seed(123);
+
+    clumsy.clear('white');
+    Spiral(clumsy, phase);
+
+    phase += 2 * Math.PI / n;
+    encoder.addFrame(clumsy.ctx);
+};
+
+encoder.finish();
+```
+
+Result:
+![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral)
+
 
 ## License
 

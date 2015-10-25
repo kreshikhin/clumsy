@@ -26,8 +26,6 @@ clumsy.drawAxis('x', 0, 7, {
     tick_size: 5
 });
 
-clumsy.ctx.fillStyle = 'black';
-
 clumsy.drawAxis('y', -2, 2, {
     limits: [-1.5, 1.5],
     step: 0.5

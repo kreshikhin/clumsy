@@ -1,7 +1,5 @@
 
 function Spiral(clumsy, phase){
-    //clumsy.ctx.font = '10px Ubuntu Mono';
-
     clumsy.padding(100);
     clumsy.range(-2, 2, -2, 2);
 
@@ -25,8 +23,6 @@ function Spiral(clumsy, phase){
         step: 0.5,
         tick_size: 5
     });
-
-    clumsy.ctx.fillStyle = 'black';
 
     clumsy.drawAxis('y', -2, 2, {
         limits: [-1.5, 1.5],
