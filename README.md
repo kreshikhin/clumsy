@@ -122,7 +122,7 @@ Result:
 This module also can be used for animation of figure. The best way is prepare a separate script with drawing function.
 The function must receive two arguments: a clumsy object and an animation param. So without any other dependencies this script can be used for rendering by both ways in a browser or  node.js
 
-Drawing script:
+Drawing script [spiral.js](examples/spiral.js):
 
 ```js
 
@@ -165,7 +165,8 @@ if(typeof module != 'undefined' && module.exports){
 
 ```
 
-Preview sript for browser:
+Preview script for browser:
+
 ```html
 <!DOCTYPE html>
 <meta charset="utf-8">
