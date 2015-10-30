@@ -14,9 +14,55 @@ This library can be used with Node.js libraries `canvas` and `gifencoder`:
 $ npm install canvas gifencoder
 ```
 
+## API
+
+```js
+// Creates new clumsy
+var clumsy = new Clumsy(canvas);
+
+// paddings
+clumsy.padding(100); // all paddings are 100px
+clumsy.padding(100, 200); // vertical paddings are 100px and horizontal are 200px
+clumsy.padding(50, 100, 150, 200); // left, right, bottom and top paddings
+
+// ranges of axis scales
+clumsy.range(-10, 10); // sets same range for horizontal and vertical space
+clumsy.range(-10, 10, -20, 20); // sets horizontal [-10,10] and vertical [-20,20] ranges
+
+// step of chaining
+clumsy.step(30); // sets 30px step
+clumsy.radius(20); // sets random radius in 20px
+clumsy.background('white'); // sets background color
+
+// clean canvas by background color
+clumsy.clean();
+
+// draws line
+clumsy.draw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
+
+// draws line with overdrawing underline lines by background color
+clumsy.overdraw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
+
+// draws axis
+// axis may be 'x', 'y', {x: 1, y: 1}
+clumsy.drawAxis('x', -1, 1); // draws axis from -1 to 1 without a scale
+clumsy.drawAxis('x', -1, 1, 0.2) // with a scale and step 0.1
+
+clumsy.drawAxis('x', -1, 1, {
+    zero: {x: 0, y: 0}, // default
+    step: 0.1,
+    limits: [start + step, end - step],
+    hide_zero: true, // hide zero mark
+    tick_size: 5, // in px
+    mark: function(t){ // default
+        return parseInt(t) + '.' + parseInt(Math.abs(t*10) % 10)
+    }
+});
+```
+
 ## Preparing for drawing
 
-Before drawing it needs to create Canvas and pass this canvas to constructor of object Clumsy. By default clumsy object have padding in 100px and ranges [-1, 1] in both directions. This can be changed by special methods:
+ It needs to create Canvas before drawing and pass this canvas to constructor of object Clumsy. By default clumsy object have padding in 100px and ranges [-1, 1] in both directions. This can be changed by special methods:
 
 ```js
 // Adds canvas module from npm repository for example
@@ -49,24 +95,16 @@ var helpers = require('clumsy/helpers');
 var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 
-clumsy.padding(150);
+clumsy.padding(100);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 
-var sine = [];
-
-for(var t=0; t < 2*Math.PI; t += 0.01){
-    sine.push({
-        x: t,
-        y: Math.sin(t)
-    });
-};
-
+var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
 clumsy.draw(sine);
 
 helpers.saveAsPng(clumsy); // save as png of same name
 ```
 
-Result:
+The result:
 
 ![sine](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
@@ -85,27 +123,12 @@ clumsy.ctx.font = '24px VoronovFont';
 clumsy.padding(100);
 clumsy.range(0, 7, -1.5, 1.5);
 
-var sine = [];
-
-for(var t=0; t < 2*Math.PI; t += 0.01){
-    sine.push({
-        x: t,
-        y: Math.sin(t)
-    });
-};
+var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
 
 clumsy.draw(sine);
 
-clumsy.drawAxis('x', 0, 7, {
-    limits: [0.5, 6.5],
-    step: 0.5,
-    tick_size: 5
-});
-
-clumsy.drawAxis('y', -2, 2, {
-    limits: [-1.5, 1.5],
-    step: 0.5
-});
+clumsy.drawAxis('x', 0, 7, 0.5);
+clumsy.drawAxis('y', -2, 2, 0.5);
 
 clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
 
@@ -113,7 +136,7 @@ helpers.saveAsPng(clumsy);
 
 ```
 
-Result:
+The result:
 
 ![axis](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
@@ -129,32 +152,17 @@ Drawing script [spiral.js](examples/spiral.js):
 function Spiral(clumsy, phase){
     clumsy.padding(100);
     clumsy.range(-2, 2, -2, 2);
-
     clumsy.radius = 3;
 
-    var spiral = [];
-
-    for(var t=0; t < 3; t += 0.01){
-        var r = 0.5 * t;
-
-        var x = r * Math.cos(2 * Math.PI * t + phase);
-        var y = r * Math.sin(2 * Math.PI * t + phase);
-
-        spiral.push({x: x, y: y});
-    };
+    var spiral = clumsy.tabualte(0, 3, 0.01, function(t){
+        var a = 2 * Math.PI * t + phase;
+        return {x: Math.cos(a), y: Math.sin(a) };
+    });
 
     clumsy.draw(spiral);
 
-    clumsy.drawAxis('x', -2, 2, {
-        limits: [-1.5, 1.5],
-        step: 0.5,
-        tick_size: 5
-    });
-
-    clumsy.drawAxis('y', -2, 2, {
-        limits: [-1.5, 1.5],
-        step: 0.5
-    });
+    clumsy.drawAxis('x', -4, 4, 0.5);
+    clumsy.drawAxis('y', -4, 4, 0.5);
 
     clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
 }
@@ -228,7 +236,7 @@ for(var i = 0; i < n; i++){
 encoder.finish();
 ```
 
-Result:
+The result:
 
 ![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral.gif)
 

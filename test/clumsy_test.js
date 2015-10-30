@@ -117,4 +117,19 @@ describe('Clumsy', function(){
         var r1 = clumsy.random();
         assert.equal(r0, r1);
     });
+
+    it('should adjust limits', function(){
+        var result = clumsy.adjustLimits(-0.9, 1.7);
+        assert.equal(JSON.stringify(result.limits), JSON.stringify([ -0.8, 1.6 ]));
+        assert.equal(result.step, 0.1);
+
+        var result2 = clumsy.adjustLimits(-8, 17);
+        assert.equal(JSON.stringify(result2.limits), JSON.stringify([ -7, 16]));
+        assert.equal(result2.step, 1);
+    });
+
+    it('should allow to tabulate functions', function(){
+        var sine = clumsy.tabulate(0, 1, 1, Math.exp);
+        assert.equal(JSON.stringify(sine), JSON.stringify([{x: 0, y: 1}, {x:1, y:Math.E}]));
+    });
 });

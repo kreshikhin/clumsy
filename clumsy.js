@@ -19,6 +19,8 @@ function Clumsy(canvas){
 
     self.defaultBoxAscent = 16;
 
+    self.clean_color = '';
+
     function isNumber(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
@@ -27,8 +29,9 @@ function Clumsy(canvas){
         return (typeof object !== 'undefined');
     }
 
-    self.clear = function(color){
+    self.clean = function(color){
         self.ctx.save();
+        self.clean_color = color;
         self.ctx.fillStyle = color || 'white';
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
         self.ctx.restore();
@@ -92,6 +95,32 @@ function Clumsy(canvas){
 
     self.scale_vertical = function(){
         return (self.canvas.height - self.padding_bottom - self.padding_top) / self.range_vertical();
+    }
+
+    self.overdraw = function(line){
+        self.ctx.save();
+        self.fillStyle = self.clean_color;
+        self.lineWidth *= 2;
+        self.draw(line);
+        self.ctx.restore();
+        self.draw(line);
+    }
+
+    self.tabulate = function(start, end, step, cb){
+        var result = [];
+        for(var t = start; t <= end; t+= step){
+            var f = cb(t);
+
+            if(isNumber(f)){
+                result.push({x: t, y: f});
+                continue;
+            }
+
+            if(isSet(f) && isSet(f.x) && isSet(f.y)){
+                result.push(f);
+            }
+        }
+        return result;
     }
 
     self.draw = function(line){
@@ -256,20 +285,30 @@ function Clumsy(canvas){
     };
 
     self.drawAxis = function(axis, t0, t1, options){
+        if(isNumber(options)){
+            options = {step: options}
+        };
+
+        options = options || {};
+
         var dir = axis;
-        if(axis === 'x') dir = {x: 1, y: 0};
-        if(axis === 'y') dir = {x: 0, y: 1};
+        if(axis === 'x' || axis === '+x') dir = {x: 1, y: 0};
+        if(axis === 'y' || axis === '+y') dir = {x: 0, y: 1};
         if(axis === '-x') dir = {x: -1, y: 0};
         if(axis === '-y') dir = {x: -0, y: 1};
+
         dir = {
             x: dir.x / Math.sqrt(dir.x*dir.x+dir.y*dir.y),
             y: dir.y / Math.sqrt(dir.x*dir.x+dir.y*dir.y),
-        }
+        };
+
+        var adjusted = self.adjustLimits(t0, t1);
 
         var opts = options || {};
         var line = [];
+        var step = options.step || adjusted.step;
         var zero = opts.zero || {x: 0, y: 0};
-        var limits = opts.limits || [t0, t1];
+        var limits = opts.limits || [t0 + step, t1 - step];
         var hide_zero = opts.hide_zero || true;
 
         var mark = opts.mark || function(t){
@@ -370,6 +409,22 @@ function Clumsy(canvas){
         var result = ((m_z << 16) + m_w) & mask;
         result /= 4294967296;
         return result + 0.5;
+    }
+
+    self.adjustLimits = function(start, end){
+        if(start === end) { reutrn [0, 0]; };
+        var d = Math.abs(end - start) / 10;
+        var p = Math.floor(Math.log(d) / Math.log(10));
+        var step = Math.pow(10, p);
+
+        var limit_start = start > 0 ?
+            Math.floor(start / step - 0.5) * step:
+            Math.ceil(start / step + 0.5) * step;
+        var limit_end = end > 0 ?
+            Math.floor(end / step - 0.5) * step:
+            Math.ceil(end / step + 0.5) * step;
+
+        return {limits: [limit_start, limit_end], step: step};
     }
 };
 

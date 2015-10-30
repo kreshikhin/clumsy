@@ -4,8 +4,8 @@ var GIFEncoder = require('gifencoder');
 var path = require('path');
 var fs = require('fs');
 
-var Clumsy = require('clumsy');
-var helpers = require('clumsy/helpers');
+var Clumsy = require('../clumsy');
+var helpers = require('../helpers');
 
 var Spiral = require('./spiral.js');
 
@@ -21,7 +21,7 @@ encoder.start();
 for(var i = 0; i < n; i++){
     clumsy.seed(123);
 
-    clumsy.clear('white');
+    clumsy.clean('white');
     Spiral(clumsy, phase);
 
     phase += 2 * Math.PI / n;

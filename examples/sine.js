@@ -4,29 +4,14 @@ function Sine(clumsy){
     clumsy.padding(100);
     clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 
-    var sinus = [];
+    var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
 
-    for(var t=0; t < 2*Math.PI; t += 0.01){
-        sinus.push({
-            x: t,
-            y: Math.sin(t)
-        });
-    };
+    console.log(sine);
 
-    clumsy.draw(sinus);
+    clumsy.draw(sine);
 
-    clumsy.drawAxis('x', 0, 2 * Math.PI, {
-        limits: [0.5, 5.5],
-        step: 0.5,
-        tick_size: 5
-    });
-
-    clumsy.ctx.fillStyle = 'black';
-
-    clumsy.drawAxis('y', -2, 2, {
-        limits: [-1.5, 1.5],
-        step: 0.5
-    });
+    clumsy.drawAxis('x', 0, 7, 0.5);
+    clumsy.drawAxis('y', -2, 2, 0.5);
 
     clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
 }

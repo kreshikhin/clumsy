@@ -5,29 +5,18 @@ function Spiral(clumsy, phase){
 
     clumsy.radius = 3;
 
-    var spiral = [];
-
-    for(var t=0; t < 3; t += 0.01){
+    var spiral = clumsy.tabulate(0, 3, 0.01, function(t){
         var r = 0.5 * t;
-
-        var x = r * Math.cos(2 * Math.PI * t + phase);
-        var y = r * Math.sin(2 * Math.PI * t + phase);
-
-        spiral.push({x: x, y: y});
-    };
+        return {
+            x: r * Math.cos(2 * Math.PI * t + phase),
+            y: r * Math.sin(2 * Math.PI * t + phase)
+        };
+    })
 
     clumsy.draw(spiral);
 
-    clumsy.drawAxis('x', -2, 2, {
-        limits: [-1.5, 1.5],
-        step: 0.5,
-        tick_size: 5
-    });
-
-    clumsy.drawAxis('y', -2, 2, {
-        limits: [-1.5, 1.5],
-        step: 0.5
-    });
+    clumsy.drawAxis('x', -2, 2, 0.5);
+    clumsy.drawAxis('y', -2, 2, 0.5);
 
     clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
 }
