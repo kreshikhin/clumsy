@@ -19,12 +19,30 @@ $ npm install canvas gifencoder
 ```js
 // Creates new clumsy
 var clumsy = new Clumsy(canvas);
+```
 
 // paddings
-clumsy.padding(100); // all paddings are 100px
+<a name="padding" />
+### padding(size)
+### padding(vertical, horizontal)
+### padding(left, right, bottom, top)
+
+__Arguments__
+
+* `size` - size of all paddings
+* `veritcal`, `horizontal` - vertical and horizontal paddings
+* `left`, `right`, `bottom`, `top` - vertical and horizontal paddings
+
+__Example__
+
+
+```js
+clumsy.padding(100); // all 100px
 clumsy.padding(100, 200); // vertical paddings are 100px and horizontal are 200px
 clumsy.padding(50, 100, 150, 200); // left, right, bottom and top paddings
+```
 
+```js
 // ranges of axis scales
 clumsy.range(-10, 10); // sets same range for horizontal and vertical space
 clumsy.range(-10, 10, -20, 20); // sets horizontal [-10,10] and vertical [-20,20] ranges
