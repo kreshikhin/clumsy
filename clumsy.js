@@ -9,6 +9,8 @@ function Clumsy(canvas){
     self.canvas = canvas;
     self.ctx = self.canvas.getContext('2d');
 
+    self.ctx.lineWidth = 2;
+
     self.padding_left = 0;
     self.padding_right = 0;
     self.padding_bottom = 0;
@@ -19,7 +21,7 @@ function Clumsy(canvas){
 
     self.defaultBoxAscent = 16;
 
-    self.clean_color = '';
+    self.background = '';
 
     function isNumber(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -29,10 +31,26 @@ function Clumsy(canvas){
         return (typeof object !== 'undefined');
     }
 
+    self.color = function(color){
+        if(color === undefined){
+            return self.ctx.strokeColor;
+        }
+
+        self.ctx.strokeStyle = color;
+    }
+
+    self.lineWidth = function(width){
+        if(width === undefined){
+            return self.ctx.lineWidth;
+        }
+
+        self.ctx.lineWidth = width;
+    }
+
     self.clean = function(color){
         self.ctx.save();
-        self.clean_color = color;
-        self.ctx.fillStyle = color || 'white';
+        self.background = color || self.background || 'white';
+        self.ctx.fillStyle = self.background;
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
         self.ctx.restore();
     }
@@ -99,10 +117,13 @@ function Clumsy(canvas){
 
     self.overdraw = function(line){
         self.ctx.save();
-        self.fillStyle = self.clean_color;
-        self.lineWidth *= 2;
+        var seed = self.seed();
+        self.ctx.strokeStyle = self.background;
+        self.ctx.lineWidth *= 3;
+        self.seed(seed);
         self.draw(line);
         self.ctx.restore();
+        self.seed(seed);
         self.draw(line);
     }
 
@@ -155,7 +176,6 @@ function Clumsy(canvas){
 
         ctx.stroke();
 
-        //console.log(replottedLine.length);
         for(var i = 0; i < replottedLine.length; i++){
             var point = replottedLine[i];
 
@@ -380,7 +400,6 @@ function Clumsy(canvas){
             return;
         }
         if(isSet(align) && isNumber(align.x) && isNumber(align.y)){
-            //console.log(align.y * m.actualBoundingBoxAscent);
             ctx.fillText(text,
                 x + (-1 + align.x) * m.width / 2,
                 y + (1 + align.y) * m.actualBoundingBoxAscent / 2);
@@ -397,8 +416,11 @@ function Clumsy(canvas){
 
     // Takes any integer
     self.seed = function(i){
+        if(i === undefined){
+            return m_w;
+        }
         m_w = i;
-        m_z = 987654321;
+        m_z = 987654321;;
     }
 
     // Returns number between 0 (inclusive) and 1.0 (exclusive),
