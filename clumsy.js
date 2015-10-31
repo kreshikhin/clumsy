@@ -366,6 +366,8 @@ function Clumsy(canvas){
         self.drawArrow(point, point.direction);
     };
 
+    self.drawAxis = self.axis;
+
     self.drawArrow = function(point, direction){
         if(!direction) return;
 

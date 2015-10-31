@@ -16,20 +16,24 @@ $ npm install canvas gifencoder
 
 ## Content
 
-  * [Preparing for drawing](#preparing-for-drawing)
-  * [Drawing a figure](#drawing-a-figure)
-  * [Drawing a figure with scaled axis and title](#drawing-a-figure-with-scaled-axis-and-title)
+  * [Preparing for drawing](#preparing)
+  * [Drawing a figure](#drawing)
+  * [Drawing a figure with scaled axis and title](#axis-and-title)
   * [Animation](#animation)
   * [API](#api)
     * [new Clumsy(canvas)](#newclumsy)
     * [axis](#axis)
-    * [clean](#local-files)
-    * [draw](#remote-files)
-    * [overdraw](#multiple-files)
-    * [padding](#local-files)
-    * [range](#local-files)
+    * [background](#background)
+    * [clean](#clean)
+    * [draw](#draw)
+    * [fillTextAtCenter](#filltextatcenter)
+    * [overdraw](#overdraw)
+    * [padding](#padding)
+    * [radius](#radius)
+    * [range](#range)
   * [License](#license)
 
+<a href="preparing" />
 ## Preparing for drawing
 
  It needs to create Canvas before drawing and pass this canvas to constructor of object Clumsy. By default clumsy object have padding in 100px and ranges [-1, 1] in both directions. This can be changed by special methods:
@@ -53,6 +57,7 @@ clumsy.padding(150);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 ```
 
+<a href="drawing" />
 ## Drawing a figure
 
 Pass arrays with points to method draw. Each point must consider x and y field, e.g. {x: 0, y: 0} - begin coordinate system.
@@ -79,6 +84,7 @@ The result:
 ![sine](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
 
+<a href="axis-and-titles" />
 ## Drawing a figure with scaled axis and title
 
 ```javascript
@@ -124,7 +130,7 @@ function Spiral(clumsy, phase){
     clumsy.range(-2, 2, -2, 2);
     clumsy.radius = 3;
 
-    var spiral = clumsy.tabualte(0, 3, 0.01, function(t){
+    var spiral = clumsy.tabulate(0, 3, 0.01, function(t){
         var a = 2 * Math.PI * t + phase;
         return {x: Math.cos(a), y: Math.sin(a) };
     });
@@ -212,6 +218,8 @@ The result:
 
 
 ## API
+
+<a name="newclumsy" />
 ### new Clumsy(canvas)
 
 Creates new clumsy object.
@@ -222,7 +230,8 @@ Creates new clumsy object.
 var clumsy = new Clumsy(canvas);
 ```
 
-### clumsy.axis(axis, start, end, [step | options]);
+<a name="axis" />
+### axis(axis, start, end, [step | options]);
 Draws axis.
 
 * `axis` may be 'x', 'y', {x: 1, y: 1}
@@ -254,6 +263,29 @@ clumsy.axis('x', -1, 1, {
 });
 ```
 
+<a name="background" />
+### background([color])
+
+Sets the background color.
+
+```js
+// Sets white as the background color
+clumsy.background('white');
+// Gets the background
+var background = clumsy.background();
+```
+
+<a name="clean" />
+### clean([color])
+Updates the background color (if argument is not undefined) and cleans the canvas.
+
+ * `color` - new background color.
+
+```js
+clumsy.clean();
+```
+
+<a name="draw" />
 ### draw(curve)
 
 Draws a curve by array of point in `{x: x, y: y}` format.
@@ -265,6 +297,18 @@ Draws a curve by array of point in `{x: x, y: y}` format.
 clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
 ```
 
+<a name="fillText" />
+### fillTextAtCenter(x, y, text)
+
+Draws text at center (x, y).
+
+* x, y - coordinates of text center
+* text - a text for drawing
+
+```js
+clumsy.fillTextAtCenter(100, 100, "Hello World!");
+```
+<a name="overdraw" />
 ### overdraw(curve)
 
 Draws a curve with clearing canvas under the curve by background color.
@@ -278,6 +322,7 @@ clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
 clumsy.draw([{x: 1, y:0}, {x: 0, y:1}]);
 ```
 
+<a name="padding" />
 ### padding(size)
 ### padding(vertical, horizontal)
 ### padding(left, right, bottom, top)
@@ -297,6 +342,19 @@ clumsy.padding(100, 200);
 clumsy.padding(50, 100, 150, 200);
 ```
 
+<a name="radius" />
+### radius([radius])
+
+Sets the radius of spreading.
+
+```js
+// Sets the radius in 20px
+clumsy.radius(20);
+// Gets the radius
+var radius = clumsy.radius();
+```
+
+<a name="range" />
 ### range(start, end)
 ### range(start0, end0, start1, start1)
 
@@ -309,6 +367,7 @@ clumsy.range(-10, 10);
 clumsy.range(-10, 10, -20, 20);
 ```
 
+<a name="step" />
 ### step([step])
 Sets the step of chaining.
 
@@ -318,37 +377,6 @@ clumsy.step(30);
 // Gets the step
 var step = clumsy.step();
 ```
-
-### radius([radius])
-
-Sets the radius of spreading.
-
-```js
-// Sets the radius in 20px
-clumsy.radius(20);
-// Gets the radius
-var radius = clumsy.radius();
-```
-### background([color])
-
-Sets the background color.
-
-```js
-// Sets white as the background color
-clumsy.background('white');
-// Gets the background
-var background = clumsy.background();
-```
-
-### clean([color])
-Updates the background color (if argument is not undefined) and cleans the canvas.
-
- * `color` - new background color.
-
-```js
-clumsy.clean();
-```
-
 
 ## License
 
