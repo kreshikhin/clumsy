@@ -14,112 +14,21 @@ This library can be used with Node.js libraries `canvas` and `gifencoder`:
 $ npm install canvas gifencoder
 ```
 
-## API
+## Content
 
-
-### Clumsy(canvas)
-
-Creates new clumsy object.
-
-__Arguments__
-
-* `canvas` - instance of HTMLCanvas
-
-__Example__
-```js
-var clumsy = new Clumsy(canvas);
-```
-
-### padding(size)
-### padding(vertical, horizontal)
-### padding(left, right, bottom, top)
-
-__Arguments__
-
-* `size` - size of all paddings
-* `veritcal`, `horizontal` - vertical and horizontal paddings
-* `left`, `right`, `bottom`, `top` - vertical and horizontal paddings
-
-__Example__
-
-```js
-clumsy.padding(100); // all 100px
-clumsy.padding(100, 200); // vertical paddings are 100px and horizontal are 200px
-clumsy.padding(50, 100, 150, 200); // left, right, bottom and top paddings
-```
-
-### range(start, end)
-### range(start0, end0, start1, start2)
-
-```js
-// ranges of axis scales
-clumsy.range(-10, 10); // sets same range for horizontal and vertical space
-clumsy.range(-10, 10, -20, 20); // sets horizontal [-10,10] and vertical [-20,20] ranges
-```
-
-```js
-// step of chaining
-clumsy.step(30); // sets 30px step
-clumsy.radius(20); // sets random radius in 20px
-clumsy.background('white'); // sets background color
-
-// clean canvas by background color
-clumsy.clean();
-```
-
-### clumsy.draw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
-
-Draws line by arrays of point in `{x: x, y: y}` format.
-
-### clumsy.overdraw(line)
-
-Draws line with clearing canvas under the line by background color.
-
-__Arguments__
-
-* `line` is [{x: x0, y: y0}, ... {x: xn-1, yn-1}]
-
-__Example__
-
-Draws line from (0,0) to (1,1).
-
-```js
-clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
-```
-
-### clumsy.drawAxis(axis, start, end, [step | options]);
-Draws axis.
-
-__Arguments__
-* `axis` may be 'x', 'y', {x: 1, y: 1}
-* `start`, `end` - range of axis
-* `step` - step of scale
-* `options`
-
-__Example__
-
-Draws axis from -1 to 1 without a scale
-```js
-clumsy.drawAxis('x', -1, 1);
-```
-Draws axis from -1 to 1 with a scale and step 0.2.
-```js
-clumsy.drawAxis('x', -1, 1, 0.2);
-```
-
-Draws axis with custom options:
-```
-clumsy.drawAxis('x', -1, 1, {
-    zero: {x: 0, y: 0}, // default
-    step: 0.1,
-    limits: [start + step, end - step],
-    hide_zero: true, // hide zero mark
-    tick_size: 5, // in px
-    mark: function(t){ // default
-        return parseInt(t) + '.' + parseInt(Math.abs(t*10) % 10)
-    }
-});
-```
+  * [Preparing for drawing](#preparing-for-drawing)
+  * [Drawing a figure](#drawing-a-figure)
+  * [Drawing a figure with scaled axis and title](#drawing-a-figure-with-scaled-axis-and-title)
+  * [Animation](#animation)
+  * [API](#api)
+    * [new Clumsy(canvas)](#newclumsy)
+    * [clean](#local-files)
+    * [draw](#remote-files)
+    * [drawAxis](#drawAxis)
+    * [overdraw](#multiple-files)
+    * [padding](#local-files)
+    * [range](#local-files)
+  * [License](#License)
 
 ## Preparing for drawing
 
@@ -300,6 +209,118 @@ encoder.finish();
 The result:
 
 ![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral.gif)
+
+
+## API
+### new Clumsy(canvas)
+
+Creates new clumsy object.
+
+__Arguments__
+
+* `canvas` - an instance of HTMLCanvas
+
+__Example__
+```js
+var clumsy = new Clumsy(canvas);
+```
+
+### padding(size)
+### padding(vertical, horizontal)
+### padding(left, right, bottom, top)
+
+Sets paddings from the edges of the canvas.
+
+__Arguments__
+
+* `size` - size of all paddings
+* `veritcal`, `horizontal` - vertical and horizontal paddings
+* `left`, `right`, `bottom`, `top` - vertical and horizontal paddings
+
+__Example__
+
+
+```js
+// Sets all padding in 100px
+clumsy.padding(100);
+// Sets vertical paddings are 100px and horizontal are 200px
+clumsy.padding(100, 200);
+// Sets left, right, bottom and top paddings
+clumsy.padding(50, 100, 150, 200);
+```
+
+### range(start, end)
+### range(start0, end0, start1, start2)
+
+```js
+// ranges of axis scales
+clumsy.range(-10, 10); // sets same range for horizontal and vertical space
+clumsy.range(-10, 10, -20, 20); // sets horizontal [-10,10] and vertical [-20,20] ranges
+```
+
+```js
+// step of chaining
+clumsy.step(30); // sets 30px step
+clumsy.radius(20); // sets random radius in 20px
+clumsy.background('white'); // sets background color
+
+// clean canvas by background color
+clumsy.clean();
+```
+
+### clumsy.draw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
+
+Draws line by arrays of point in `{x: x, y: y}` format.
+
+### clumsy.overdraw(line)
+
+Draws line with clearing canvas under the line by background color.
+
+__Arguments__
+
+* `line` is [{x: x0, y: y0}, ... {x: xn-1, yn-1}]
+
+__Example__
+
+Draws line from (0,0) to (1,1).
+
+```js
+clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
+```
+
+### clumsy.drawAxis(axis, start, end, [step | options]);
+Draws axis.
+
+__Arguments__
+* `axis` may be 'x', 'y', {x: 1, y: 1}
+* `start`, `end` - range of axis
+* `step` - step of scale
+* `options`
+
+__Example__
+
+Draws axis from -1 to 1 without a scale
+```js
+clumsy.drawAxis('x', -1, 1);
+```
+Draws axis from -1 to 1 with a scale and step 0.2.
+```js
+clumsy.drawAxis('x', -1, 1, 0.2);
+```
+
+Draws axis with custom options:
+```
+clumsy.drawAxis('x', -1, 1, {
+    zero: {x: 0, y: 0}, // default
+    step: 0.1,
+    limits: [start + step, end - step],
+    hide_zero: true, // hide zero mark
+    tick_size: 5, // in px
+    mark: function(t){ // default
+        return parseInt(t) + '.' + parseInt(Math.abs(t*10) % 10)
+    }
+});
+```
 
 ## License
 
