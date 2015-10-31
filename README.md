@@ -16,13 +16,20 @@ $ npm install canvas gifencoder
 
 ## API
 
+
+### Clumsy(canvas)
+
+Creates new clumsy object.
+
+__Arguments__
+
+* `canvas` - instance of HTMLCanvas
+
+__Example__
 ```js
-// Creates new clumsy
 var clumsy = new Clumsy(canvas);
 ```
 
-// paddings
-<a name="padding" />
 ### padding(size)
 ### padding(vertical, horizontal)
 ### padding(left, right, bottom, top)
@@ -35,18 +42,22 @@ __Arguments__
 
 __Example__
 
-
 ```js
 clumsy.padding(100); // all 100px
 clumsy.padding(100, 200); // vertical paddings are 100px and horizontal are 200px
 clumsy.padding(50, 100, 150, 200); // left, right, bottom and top paddings
 ```
 
+### range(start, end)
+### range(start0, end0, start1, start2)
+
 ```js
 // ranges of axis scales
 clumsy.range(-10, 10); // sets same range for horizontal and vertical space
 clumsy.range(-10, 10, -20, 20); // sets horizontal [-10,10] and vertical [-20,20] ranges
+```
 
+```js
 // step of chaining
 clumsy.step(30); // sets 30px step
 clumsy.radius(20); // sets random radius in 20px
@@ -54,18 +65,50 @@ clumsy.background('white'); // sets background color
 
 // clean canvas by background color
 clumsy.clean();
+```
 
-// draws line
-clumsy.draw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
+### clumsy.draw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
 
-// draws line with overdrawing underline lines by background color
-clumsy.overdraw([{x: x0, y: y0}, ... {x: xn-1, yn-1}])
+Draws line by arrays of point in `{x: x, y: y}` format.
 
-// draws axis
-// axis may be 'x', 'y', {x: 1, y: 1}
-clumsy.drawAxis('x', -1, 1); // draws axis from -1 to 1 without a scale
-clumsy.drawAxis('x', -1, 1, 0.2) // with a scale and step 0.1
+### clumsy.overdraw(line)
 
+Draws line with clearing canvas under the line by background color.
+
+__Arguments__
+
+* `line` is [{x: x0, y: y0}, ... {x: xn-1, yn-1}]
+
+__Example__
+
+Draws line from (0,0) to (1,1).
+
+```js
+clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
+```
+
+### clumsy.drawAxis(axis, start, end, [step | options]);
+Draws axis.
+
+__Arguments__
+* `axis` may be 'x', 'y', {x: 1, y: 1}
+* `start`, `end` - range of axis
+* `step` - step of scale
+* `options`
+
+__Example__
+
+Draws axis from -1 to 1 without a scale
+```js
+clumsy.drawAxis('x', -1, 1);
+```
+Draws axis from -1 to 1 with a scale and step 0.2.
+```js
+clumsy.drawAxis('x', -1, 1, 0.2);
+```
+
+Draws axis with custom options:
+```
 clumsy.drawAxis('x', -1, 1, {
     zero: {x: 0, y: 0}, // default
     step: 0.1,
