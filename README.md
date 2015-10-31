@@ -26,14 +26,14 @@ $ npm install canvas gifencoder
     * [background](#background)
     * [clean](#clean)
     * [draw](#draw)
-    * [fillTextAtCenter](#filltextatcenter)
+    * [fillTextAtCenter](#filltext)
     * [overdraw](#overdraw)
     * [padding](#padding)
     * [radius](#radius)
     * [range](#range)
   * [License](#license)
 
-<a href="preparing" />
+<a name="preparing" />
 ## Preparing for drawing
 
  It needs to create Canvas before drawing and pass this canvas to constructor of object Clumsy. By default clumsy object have padding in 100px and ranges [-1, 1] in both directions. This can be changed by special methods:
@@ -57,7 +57,7 @@ clumsy.padding(150);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 ```
 
-<a href="drawing" />
+<a name="drawing" />
 ## Drawing a figure
 
 Pass arrays with points to method draw. Each point must consider x and y field, e.g. {x: 0, y: 0} - begin coordinate system.
@@ -84,7 +84,7 @@ The result:
 ![sine](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
 
-<a href="axis-and-titles" />
+<a name="axis-and-titles" />
 ## Drawing a figure with scaled axis and title
 
 ```javascript
@@ -116,6 +116,8 @@ The result:
 
 ![axis](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
+
+<a name="#animation" />
 ## Animation
 
 This module also can be used for animation of figure. The best way is prepare a separate script with drawing function.
