@@ -10,8 +10,8 @@ function Sine(clumsy){
 
     clumsy.draw(sine);
 
-    clumsy.drawAxis('x', 0, 7, 0.5);
-    clumsy.drawAxis('y', -2, 2, 0.5);
+    clumsy.axis('x', 0, 7, 0.5);
+    clumsy.axis('y', -2, 2, 0.5);
 
     clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
 }

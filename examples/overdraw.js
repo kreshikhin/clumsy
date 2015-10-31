@@ -14,14 +14,14 @@ clumsy.ctx.font = '24px VoronovFont';
 
 clumsy.clean('white');
 
-clumsy.drawAxis('x', 0, 7, 0.5);
+clumsy.axis('x', 0, 7, 0.5);
 
 clumsy.color('green');
 var sine = clumsy.tabulate(0, 2*Math.PI, 0.1, Math.sin);
 clumsy.overdraw(sine);
 
 clumsy.color('black');
-clumsy.drawAxis('y', -1.5, 1.5, 0.5);
+clumsy.axis('y', -1.5, 1.5, 0.5);
 
 clumsy.fillTextAtCenter('График со сглаживанием', clumsy.canvas.width/2, 50);
 

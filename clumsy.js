@@ -304,7 +304,7 @@ function Clumsy(canvas){
         self.ctx.fillText(text, x - size.width/2, y);
     };
 
-    self.drawAxis = function(axis, t0, t1, options){
+    self.axis = function(axis, t0, t1, options){
         if(isNumber(options)){
             options = {step: options}
         };

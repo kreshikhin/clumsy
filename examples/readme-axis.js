@@ -20,13 +20,13 @@ for(var t=0; t < 2*Math.PI; t += 0.01){
 
 clumsy.draw(sine);
 
-clumsy.drawAxis('x', 0, 7, {
+clumsy.axis('x', 0, 7, {
     limits: [0.5, 6.5],
     step: 0.5,
     tick_size: 5
 });
 
-clumsy.drawAxis('y', -2, 2, {
+clumsy.axis('y', -2, 2, {
     limits: [-1.5, 1.5],
     step: 0.5
 });

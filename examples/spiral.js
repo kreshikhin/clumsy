@@ -15,8 +15,8 @@ function Spiral(clumsy, phase){
 
     clumsy.draw(spiral);
 
-    clumsy.drawAxis('x', -2, 2, 0.5);
-    clumsy.drawAxis('y', -2, 2, 0.5);
+    clumsy.axis('x', -2, 2, 0.5);
+    clumsy.axis('y', -2, 2, 0.5);
 
     clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
 }
