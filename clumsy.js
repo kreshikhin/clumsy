@@ -10,6 +10,7 @@ function Clumsy(canvas){
     self.ctx = self.canvas.getContext('2d');
 
     self.ctx.lineWidth = 1;
+    self.ctx.lineCap = 'round';
 
     self.padding_left = 0;
     self.padding_right = 0;
@@ -21,7 +22,7 @@ function Clumsy(canvas){
 
     self.defaultBoxAscent = 16;
 
-    self.background = '';
+    self.background = 'white';
 
     function isNumber(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
