@@ -14,6 +14,8 @@ This library can be used with Node.js libraries `canvas` and `gifencoder`:
 $ npm install canvas gifencoder
 ```
 
+![readme-intro](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-intro.png)
+
 ## Contents
 
   * [Preparing for drawing](#preparing)
