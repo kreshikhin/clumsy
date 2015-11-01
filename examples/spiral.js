@@ -1,9 +1,16 @@
 
 function Spiral(clumsy, phase){
+    clumsy.font('24px VoronovFont');
+    clumsy.clean('white');
+
     clumsy.padding(100);
     clumsy.range(-2, 2, -2, 2);
+    clumsy.lineWidth(2);
+    clumsy.radius(5);
 
-    clumsy.radius = 3;
+    clumsy.color('black');
+    clumsy.axis('x', -2, 2, 0.5);
+    clumsy.axis('y', -2, 2, 0.5);
 
     var spiral = clumsy.tabulate(0, 3, 0.01, function(t){
         var r = 0.5 * t;
@@ -13,10 +20,8 @@ function Spiral(clumsy, phase){
         };
     })
 
+    clumsy.color('red');
     clumsy.draw(spiral);
-
-    clumsy.axis('x', -2, 2, 0.5);
-    clumsy.axis('y', -2, 2, 0.5);
 
     clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
 }

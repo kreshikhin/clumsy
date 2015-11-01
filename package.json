@@ -1,6 +1,6 @@
 {
   "name": "clumsy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "draws graphics and figures in xkcd style",
   "main": "clumsy.js",
   "scripts": {

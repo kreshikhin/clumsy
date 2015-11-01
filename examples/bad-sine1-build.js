@@ -8,15 +8,17 @@ var path = require('path');
 var canvas = new Canvas(800, 600);
 var clumsy = new Clumsy(canvas);
 
-clumsy.padding(100);
+clumsy.padding(50);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
-clumsy.ctx.font = '24px VoronovFont';
+clumsy.font('24px VoronovFont');
 
-clumsy.radius = 30;
-clumsy.step = 1;
+clumsy.radius(30);
+clumsy.step(1);
+clumsy.lineWidth(2);
 
 var sine = clumsy.tabulate(0, 2*Math.PI, 0.1, Math.sin);
 
+clumsy.color('black');
 clumsy.draw(sine);
 clumsy.fillTextAtCenter('Неправильный шаг', clumsy.canvas.width/2, 50);
 

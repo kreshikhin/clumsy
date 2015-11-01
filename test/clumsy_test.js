@@ -80,9 +80,9 @@ describe('Clumsy', function(){
         clumsy.padding(100);
         clumsy.range(-10, 10);
 
-        clumsy.radius = 0;
+        clumsy.radius(0);
+        clumsy.step(20);
 
-        clumsy.step = 20;
         var line = [{x: -10, y: -10}, {x: 10, y: 10}];
         var replotted = clumsy.replot(line);
 
@@ -91,7 +91,7 @@ describe('Clumsy', function(){
             JSON.stringify([{"x":-10,"y":-10},{"x":0,"y":0},{"x":10,"y":10}])
         )
 
-        clumsy.step = 10;
+        clumsy.step(10);
         var line = [{x: -10, y: -10}, {x: 0, y: 0}, {x: 10, y: 10}];
         var replotted = clumsy.replot(line);
 
@@ -131,5 +131,25 @@ describe('Clumsy', function(){
     it('should allow to tabulate functions', function(){
         var sine = clumsy.tabulate(0, 1, 1, Math.exp);
         assert.equal(JSON.stringify(sine), JSON.stringify([{x: 0, y: 1}, {x:1, y:Math.E}]));
+    });
+
+    it('should has getters and setters for all properties', function(){
+        clumsy.step(11);
+        assert(clumsy.step(), 11, 'a step sets incorrectly');
+
+        clumsy.radius(12);
+        assert(clumsy.radius(), 12, 'a radius sets incorrectly');
+
+        clumsy.color('black');
+        assert(clumsy.color(), 'black', 'a color sets incorrectly');
+
+        clumsy.background('white');
+        assert(clumsy.background(), 'white', 'a background sets incorrectly');
+
+        clumsy.font('24px Arial');
+        assert(clumsy.font(), '24px Arial', 'a font sets incorrectly');
+
+        clumsy.step(11);
+        assert(clumsy.step(), 11, 'a step sets incorrectly');
     });
 });

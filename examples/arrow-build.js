@@ -5,7 +5,7 @@ var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 var helpers = require('../helpers');
 
-clumsy.ctx.font = '24px VoronovFont';
+clumsy.font('24px VoronovFont');
 
 clumsy.padding(100);
 clumsy.range(-3, 3, -1.5, 1.5);

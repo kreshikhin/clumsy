@@ -107,7 +107,7 @@ var helpers = require('clumsy/helpers');
 var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 
-clumsy.ctx.font = '24px VoronovFont';
+clumsy.font('24px VoronovFont');
 clumsy.padding(100);
 clumsy.range(0, 7, -1.5, 1.5);
 
@@ -142,7 +142,7 @@ Drawing script [spiral.js](examples/spiral.js):
 function Spiral(clumsy, phase){
     clumsy.padding(100);
     clumsy.range(-2, 2, -2, 2);
-    clumsy.radius = 3;
+    clumsy.radius(3);
 
     var spiral = clumsy.tabulate(0, 3, 0.01, function(t){
         var a = 2 * Math.PI * t + phase;
@@ -176,7 +176,7 @@ Preview script for browser:
 <script type="text/javascript">
     var canvas = document.getElementById('canvas');
     var clumsy = new Clumsy(canvas);
-    clumsy.ctx.font = '12px VoronovFont';
+    clumsy.font('12px VoronovFont');
 
     var phase = 0;
     setInterval(function(){
@@ -206,7 +206,7 @@ var Spiral = require('./spiral.js');
 
 var canvas = new Canvas(600, 600);
 var clumsy = new Clumsy(canvas);
-clumsy.ctx.font = '24px VoronovFont';
+clumsy.font('24px VoronovFont');
 
 var encoder = helpers.prepareEncoder(GIFEncoder, canvas);
 var phase = 0;
@@ -370,20 +370,23 @@ var seed = clumsy.seed();
 
 ### properties
 
-List of available properties and default values:
-
-```
-clumsy.step = 10; // in px
-clumsy.radius = 10; // in px
-clumsy.background = '';
-clumsy.defaultBoxAscent = 16;
-```
-
 Properties with setters/getters:
 
 ```
+// In pixels
+clumsy.step(10);
+clumsy.radius(10);
+clumsy.defaultBoxAscent(16);
+clumsy.lineWidth(1);
+
+// CSS color
+clumsy.background('white');
 clumsy.color('black');
-clumsy.lineWidth(1); // in px
+
+// CSS font
+clumsy.font('12px Arial');
+
+// Seed number for the built-in pseudo random generator
 clumsy.seed(12345);
 ```
 

@@ -3,11 +3,11 @@ function StandingGroup(clumsy, shift){
     var canvas = clumsy.canvas;
 
     clumsy.clean('white');
-    clumsy.ctx.font = '24px VoronovFont';
-    clumsy.padding(100);
+    clumsy.font('24px VoronovFont');
+    clumsy.padding(50);
     clumsy.range(0, 1.1, -1, 1);
-    clumsy.radius = 3;
-    clumsy.step = 10;
+    clumsy.radius(3);
+    clumsy.step(10);
     clumsy.lineWidth(2);
 
     clumsy.color('black');

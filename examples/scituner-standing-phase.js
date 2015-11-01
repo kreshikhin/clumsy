@@ -4,12 +4,12 @@ function StandingPhase(clumsy, shift){
 
     clumsy.clean('white');
 
-    clumsy.ctx.font = '24px VoronovFont';
+    clumsy.font('24px VoronovFont');
     clumsy.lineWidth(2);
     clumsy.padding(100);
     clumsy.range(0, 1.1, -2, 2);
-    clumsy.radius = 3;
-    clumsy.step = 10;
+    clumsy.radius(3);
+    clumsy.step(10);
 
     clumsy.color('black');
     clumsy.axis('x', 0, 1.1);

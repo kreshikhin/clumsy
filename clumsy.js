@@ -17,12 +17,12 @@ function Clumsy(canvas){
     self.padding_bottom = 0;
     self.padding_top = 0;
 
-    self.step = 30;
-    self.radius = 10;
+    self.step_ = 30;
+    self.radius_ = 10;
 
-    self.defaultBoxAscent = 16;
+    self.defaultBoxAscent_ = 16;
 
-    self.background = 'white';
+    self.background_ = 'white';
 
     function isNumber(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -32,11 +32,33 @@ function Clumsy(canvas){
         return (typeof object !== 'undefined');
     }
 
-    self.color = function(color){
-        if(color === undefined){
-            return self.ctx.strokeColor;
-        }
+    self.font = function(font){
+        if(font === undefined) return self.ctx.font;
+        self.ctx.font = font;
+    }
 
+    self.step = function(step){
+        if(step === undefined) return self.step_;
+        self.step_ = step;
+    }
+
+    self.radius = function(radius){
+        if(radius === undefined) return self.radius_;
+        self.radius_ = radius;
+    }
+
+    self.background = function(background){
+        if(background === undefined) return self.background_;
+        self.background_ = background;
+    }
+
+    self.defaultBoxAscent = function(defaultBoxAscent){
+        if(defaultBoxAscent === undefined) return self.defaultBoxAscent_;
+        self.defaultBoxAscent_ = defaultBoxAscent;
+    }
+
+    self.color = function(color){
+        if(color === undefined) return self.ctx.strokeStyle;
         self.ctx.strokeStyle = color;
     }
 
@@ -50,8 +72,8 @@ function Clumsy(canvas){
 
     self.clean = function(color){
         self.ctx.save();
-        self.background = color || self.background || 'white';
-        self.ctx.fillStyle = self.background;
+        self.background_ = color || self.background_ || 'white';
+        self.ctx.fillStyle = self.background_;
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
         self.ctx.restore();
     }
@@ -119,7 +141,7 @@ function Clumsy(canvas){
     self.overdraw = function(line){
         self.ctx.save();
         var seed = self.seed();
-        self.ctx.strokeStyle = self.background;
+        self.ctx.strokeStyle = self.background_;
         self.ctx.lineWidth *= 3;
         self.seed(seed);
         self.draw(line);
@@ -230,8 +252,8 @@ function Clumsy(canvas){
     };
 
     self.replot = function(line){
-        var step = self.step;
-        var radius = self.radius;
+        var step = self.step_;
+        var radius = self.radius_;
 
         var accuracy = 0.25;
 
@@ -400,7 +422,7 @@ function Clumsy(canvas){
     self.drawText = function(text, x, y, align){
         var ctx = self.ctx;
         var m = ctx.measureText(text);
-        m.actualBoundingBoxAscent = m.actualBoundingBoxAscent || self.defaultBoxAscent;
+        m.actualBoundingBoxAscent = m.actualBoundingBoxAscent || self.defaultBoxAscent_;
 
         if(align === 'center'){
             ctx.fillText(text, x - m.width / 2, y);
