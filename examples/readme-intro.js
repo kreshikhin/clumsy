@@ -29,6 +29,9 @@ clumsy.overdraw(cosine);
 
 
 
-clumsy.fillTextAtCenter('Hello!', canvas.width/2, 50);
+
+clumsy.fillTextAtCenter('Sine vs Cosine', canvas.width/2, 50);
+clumsy.fillText("x(t)", 110, 110);
+clumsy.fillText("t", 690, 330);
 
 helpers.saveAsPng(clumsy);
