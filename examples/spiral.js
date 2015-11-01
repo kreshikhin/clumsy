@@ -3,7 +3,7 @@ function Spiral(clumsy, phase){
     clumsy.font('24px VoronovFont');
     clumsy.clean('white');
 
-    clumsy.padding(100);
+    clumsy.padding(50);
     clumsy.range(-2, 2, -2, 2);
     clumsy.lineWidth(2);
     clumsy.radius(5);
@@ -23,7 +23,7 @@ function Spiral(clumsy, phase){
     clumsy.color('red');
     clumsy.draw(spiral);
 
-    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
+    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 30);
 }
 
 if(typeof module != 'undefined' && module.exports){

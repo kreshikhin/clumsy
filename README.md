@@ -65,7 +65,7 @@ var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 
 // Sets padding and ranges before drawing
-clumsy.padding(150);
+clumsy.padding(50);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 ```
 
@@ -82,8 +82,10 @@ var helpers = require('clumsy/helpers');
 var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 
-clumsy.padding(100);
+clumsy.padding(50);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
+clumsy.color('red');
+clumsy.lineWidth(2);
 
 var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
 clumsy.draw(sine);
@@ -108,15 +110,16 @@ var canvas = new Canvas(800, 600)
 var clumsy = new Clumsy(canvas);
 
 clumsy.font('24px VoronovFont');
-clumsy.padding(100);
-clumsy.range(0, 7, -1.5, 1.5);
-
-var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
-
-clumsy.draw(sine);
+clumsy.padding(50);
+clumsy.range(0, 7, -2, 2);
+clumsy.lineWidth(2);
 
 clumsy.axis('x', 0, 7, 0.5);
 clumsy.axis('y', -2, 2, 0.5);
+
+clumsy.color('red');
+var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
+clumsy.draw(sine);
 
 clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
 
@@ -140,21 +143,30 @@ Drawing script [spiral.js](examples/spiral.js):
 ```js
 
 function Spiral(clumsy, phase){
-    clumsy.padding(100);
+    clumsy.font('24px VoronovFont');
+    clumsy.clean('white');
+
+    clumsy.padding(50);
     clumsy.range(-2, 2, -2, 2);
-    clumsy.radius(3);
+    clumsy.lineWidth(2);
+    clumsy.radius(5);
+
+    clumsy.color('black');
+    clumsy.axis('x', -2, 2, 0.5);
+    clumsy.axis('y', -2, 2, 0.5);
 
     var spiral = clumsy.tabulate(0, 3, 0.01, function(t){
-        var a = 2 * Math.PI * t + phase;
-        return {x: Math.cos(a), y: Math.sin(a) };
-    });
+        var r = 0.5 * t;
+        return {
+            x: r * Math.cos(2 * Math.PI * t + phase),
+            y: r * Math.sin(2 * Math.PI * t + phase)
+        };
+    })
 
+    clumsy.color('red');
     clumsy.draw(spiral);
 
-    clumsy.axis('x', -4, 4, 0.5);
-    clumsy.axis('y', -4, 4, 0.5);
-
-    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 50);
+    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 30);
 }
 
 if(typeof module != 'undefined' && module.exports){
@@ -372,7 +384,7 @@ var seed = clumsy.seed();
 
 Properties with setters/getters:
 
-```
+```js
 // In pixels
 clumsy.step(10);
 clumsy.radius(10);
