@@ -1,7 +1,7 @@
 
 var Canvas = require('canvas');
-var Clumsy = require('clumsy');
-var helpers = require('clumsy/helpers');
+var Clumsy = require('../clumsy');
+var helpers = require('../helpers');
 var fs = require('fs');
 var path = require('path');
 
@@ -15,11 +15,7 @@ clumsy.ctx.font = '24px VoronovFont';
 clumsy.radius = 30;
 clumsy.step = 1;
 
-var sine = [];
-
-for(var t=0; t < 2*Math.PI; t += 0.1){
-    sine.push({x: t, y: Math.sin(t)});
-};
+var sine = clumsy.tabulate(0, 2*Math.PI, 0.1, Math.sin);
 
 clumsy.draw(sine);
 clumsy.fillTextAtCenter('Неправильный шаг', clumsy.canvas.width/2, 50);

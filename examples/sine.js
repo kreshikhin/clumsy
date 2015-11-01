@@ -2,12 +2,9 @@
 function Sine(clumsy){
     clumsy.ctx.font = '24px VoronovFont';
     clumsy.padding(100);
-    clumsy.range(0, 2*Math.PI, -1.5, 1.5);
+    clumsy.range(0, 7, -2, 2);
 
     var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
-
-    console.log(sine);
-
     clumsy.draw(sine);
 
     clumsy.axis('x', 0, 7, 0.5);

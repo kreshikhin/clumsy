@@ -14,7 +14,7 @@ This library can be used with Node.js libraries `canvas` and `gifencoder`:
 $ npm install canvas gifencoder
 ```
 
-## Content
+## Contents
 
   * [Preparing for drawing](#preparing)
   * [Drawing a figure](#drawing)
@@ -22,6 +22,7 @@ $ npm install canvas gifencoder
   * [Animation](#animation)
   * [API](#api)
     * [new Clumsy(canvas)](#newclumsy)
+    * methods:
     * [axis](#axis)
     * [background](#background)
     * [clean](#clean)
@@ -29,8 +30,17 @@ $ npm install canvas gifencoder
     * [fillTextAtCenter](#filltext)
     * [overdraw](#overdraw)
     * [padding](#padding)
-    * [radius](#radius)
+    * [seed](#seed)
     * [range](#range)
+    * [tabulate](#tabulate)
+    * properties:
+    * [background](#properties)
+    * [color](#properties)
+    * [defaultBoxAscent](#properties)
+    * [lineWidth](#properties)
+    * [radius](#properties)
+    * [step](#properties)
+
   * [License](#license)
 
 <a name="preparing" />
@@ -265,18 +275,6 @@ clumsy.axis('x', -1, 1, {
 });
 ```
 
-<a name="background" />
-### background([color])
-
-Sets the background color.
-
-```js
-// Sets white as the background color
-clumsy.background('white');
-// Gets the background
-var background = clumsy.background();
-```
-
 <a name="clean" />
 ### clean([color])
 Updates the background color (if argument is not undefined) and cleans the canvas.
@@ -344,18 +342,6 @@ clumsy.padding(100, 200);
 clumsy.padding(50, 100, 150, 200);
 ```
 
-<a name="radius" />
-### radius([radius])
-
-Sets the radius of spreading.
-
-```js
-// Sets the radius in 20px
-clumsy.radius(20);
-// Gets the radius
-var radius = clumsy.radius();
-```
-
 <a name="range" />
 ### range(start, end)
 ### range(start0, end0, start1, start1)
@@ -369,15 +355,34 @@ clumsy.range(-10, 10);
 clumsy.range(-10, 10, -20, 20);
 ```
 
-<a name="step" />
-### step([step])
-Sets the step of chaining.
+<a name="seed" />
+### seed([seed])
+Sets the seed of generator of pseudo random numbers.
 
 ```js
-// Sets the step in 30px
-clumsy.step(30);
-// Gets the step
-var step = clumsy.step();
+// Sets the seed
+clumsy.seed(123456);
+// Gets current seed
+var seed = clumsy.seed();
+```
+
+### properties
+
+List of available properties and default values:
+
+```
+clumsy.step = 10; // in px
+clumsy.radius = 10; // in px
+clumsy.background = '';
+clumsy.defaultBoxAscent = 16;
+```
+
+Properties with setters/getters:
+
+```
+clumsy.color('black');
+clumsy.lineWidth(1); // in px
+clumsy.seed(12345);
 ```
 
 ## License

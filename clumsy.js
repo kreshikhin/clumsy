@@ -9,7 +9,7 @@ function Clumsy(canvas){
     self.canvas = canvas;
     self.ctx = self.canvas.getContext('2d');
 
-    self.ctx.lineWidth = 2;
+    self.ctx.lineWidth = 1;
 
     self.padding_left = 0;
     self.padding_right = 0;
@@ -329,7 +329,7 @@ function Clumsy(canvas){
         var step = options.step || adjusted.step;
         var zero = opts.zero || {x: 0, y: 0};
         var limits = opts.limits || [t0 + step, t1 - step];
-        var hide_zero = opts.hide_zero || true;
+        var hide_zero = opts.hide_zero !== undefined ? opts.hide_zero : true;
 
         var mark = opts.mark || function(t){
             return parseInt(t) + '.' + parseInt(Math.abs(t*10) % 10)
