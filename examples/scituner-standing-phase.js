@@ -6,7 +6,7 @@ function StandingPhase(clumsy, shift){
 
     clumsy.font('24px VoronovFont');
     clumsy.lineWidth(2);
-    clumsy.padding(100);
+    clumsy.padding(50);
     clumsy.range(0, 1.1, -2, 2);
     clumsy.radius(3);
     clumsy.step(10);
@@ -26,8 +26,8 @@ function StandingPhase(clumsy, shift){
     clumsy.draw(wave);
 
     clumsy.fillTextAtCenter("Стоячая волна, Vф = 0", canvas.width/2, 50);
-    clumsy.fillText("x(t)", 110, 110);
-    clumsy.fillText("t", 690, 330);
+    clumsy.fillText("x(t)", 60, 60);
+    clumsy.fillText("t", 740, 330);
 }
 
 if(typeof module != 'undefined' && module.exports){

@@ -26,8 +26,8 @@ function StandingGroup(clumsy, shift){
     clumsy.draw(wave);
 
     clumsy.fillTextAtCenter("Стоячая волна, Vгр = 0", canvas.width/2, 50);
-    clumsy.fillText("x(t)", 110, 110);
-    clumsy.fillText("t", 690, 330);
+    clumsy.fillText("x(t)", 60, 60);
+    clumsy.fillText("t", 740, 330);
 }
 
 if(typeof module != 'undefined' && module.exports){
