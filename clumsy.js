@@ -463,7 +463,7 @@ function Clumsy(canvas){
     }
 
     self.adjustLimits = function(start, end){
-        if(start === end) { reutrn [0, 0]; };
+        if(start === end) { return [0, 0]; };
         var d = Math.abs(end - start) / 10;
         var p = Math.floor(Math.log(d) / Math.log(10));
         var step = Math.pow(10, p);
