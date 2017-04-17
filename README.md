@@ -194,7 +194,7 @@ Preview script for browser:
     setInterval(function(){
         clumsy.seed(123);
 
-        clumsy.clear('white');
+        clumsy.clean('white');
         Spiral(clumsy, phase);
 
         phase += Math.PI / 10;
@@ -228,7 +228,7 @@ encoder.start();
 for(var i = 0; i < n; i++){
     clumsy.seed(123);
 
-    clumsy.clear('white');
+    clumsy.clean('white');
     Spiral(clumsy, phase);
 
     phase += 2 * Math.PI / n;
