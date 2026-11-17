@@ -18,7 +18,7 @@ Rendering to PNG or GIF in Node.js also needs [`canvas`](https://www.npmjs.com/p
 npm install canvas gifencoder
 ```
 
-![Sine and cosine drawn in an XKCD style](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-intro.png)
+![Sine and cosine drawn in an XKCD style](https://raw.githubusercontent.com/kreshikhin/clumsy/main/examples/readme-intro.png)
 
 ## Contents
 
@@ -96,7 +96,7 @@ helpers.saveAsPng(clumsy); // save as png of same name
 
 The result:
 
-![A hand-drawn sine wave](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-sine.png)
+![A hand-drawn sine wave](https://raw.githubusercontent.com/kreshikhin/clumsy/main/examples/readme-sine.png)
 
 
 <a name="axis-and-title"></a>
@@ -131,7 +131,7 @@ helpers.saveAsPng(clumsy);
 
 The result:
 
-![A sine wave with hand-drawn axes and a title](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-axis.png)
+![A sine wave with hand-drawn axes and a title](https://raw.githubusercontent.com/kreshikhin/clumsy/main/examples/readme-axis.png)
 
 
 <a name="animation"></a>
@@ -183,7 +183,7 @@ Preview script for browser:
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>spiral</title>
-<script src="https://cdn.jsdelivr.net/gh/kreshikhin/clumsy@master/clumsy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kreshikhin/clumsy@main/clumsy.js"></script>
 <link rel="stylesheet" href="http://webfonts.ru/import/voronov.css"></link>
 <canvas id="canvas" width=600 height=600>
 <script type="text/javascript" src="spiral.js"></script>
@@ -242,7 +242,7 @@ encoder.finish();
 
 The result:
 
-![An animated hand-drawn spiral](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/spiral.gif)
+![An animated hand-drawn spiral](https://raw.githubusercontent.com/kreshikhin/clumsy/main/examples/spiral.gif)
 
 
 ## API
