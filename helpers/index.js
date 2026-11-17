@@ -1,13 +1,20 @@
+'use strict';
 
 var path = require('path');
 var fs = require('fs');
 
 var takeGifName = function(){
     return path.basename(process.argv[1], '.js').replace('-build', '') + '.gif';
-}
+};
 
 var takePngName = function(){
     return path.basename(process.argv[1], '.js').replace('-build', '') + '.png';
+};
+
+function pngStream(canvas){
+    if(canvas.createPNGStream) return canvas.createPNGStream();
+    if(canvas.pngStream) return canvas.pngStream();
+    throw new Error('Canvas must provide createPNGStream()');
 }
 
 module.exports = {
@@ -15,8 +22,8 @@ module.exports = {
     takePngName: takePngName,
     prepareEncoder: function(ctor, canvas, name, repeat, delay, quality){
         if(!ctor || !canvas){
-            throw('First and second arguments are required. Pass constructor of GIFEncoder as first, and instance of Canvas as second');
-        };
+            throw new Error('First and second arguments are required. Pass the GIFEncoder constructor as the first argument and a canvas as the second');
+        }
 
         var encoder = new ctor(canvas.width, canvas.height);
         encoder.createReadStream().pipe(
@@ -28,13 +35,15 @@ module.exports = {
         encoder.setQuality(quality || 10); // image quality. 10 is default.
         return encoder;
     },
-    saveAsPng: function(clumsy){
+    saveAsPng: function(clumsy, name){
         if(!clumsy){
-            throw('First argument are required. It must be instance of Clumsy');
-        };
+            throw new Error('First argument is required. It must be an instance of Clumsy');
+        }
 
-        var name = takePngName();
-        var out = fs.createWriteStream(path.join('./', name));
-        clumsy.canvas.pngStream().pipe(out);
+        var fileName = name || takePngName();
+        var filePath = path.isAbsolute(fileName) ? fileName : path.join('./', fileName);
+        var out = fs.createWriteStream(filePath);
+        pngStream(clumsy.canvas).pipe(out);
+        return out;
     }
-}
+};

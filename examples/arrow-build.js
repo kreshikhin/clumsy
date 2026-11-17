@@ -1,7 +1,7 @@
-var Canvas = require('canvas');
+var createCanvas = require('canvas').createCanvas;
 var Clumsy = require('../clumsy');
 
-var canvas = new Canvas(800, 600)
+var canvas = createCanvas(800, 600)
 var clumsy = new Clumsy(canvas);
 var helpers = require('../helpers');
 

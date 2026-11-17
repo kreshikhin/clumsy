@@ -1,5 +1,5 @@
 
-var Canvas = require('canvas');
+var createCanvas = require('canvas').createCanvas;
 var GIFEncoder = require('gifencoder');
 
 var Clumsy = require('../clumsy');
@@ -7,7 +7,7 @@ var helpers = require('../helpers');
 
 var Spiral = require('./spiral.js');
 
-var canvas = new Canvas(600, 600);
+var canvas = createCanvas(600, 600);
 var clumsy = new Clumsy(canvas);
 
 var encoder = helpers.prepareEncoder(GIFEncoder, canvas);

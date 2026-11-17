@@ -1,7 +1,8 @@
+'use strict';
 
 function Clumsy(canvas){
     if(!canvas){
-        throw('Canvas is required as first argument.')
+        throw new Error('Canvas is required as first argument.')
     }
 
     var self = this;
@@ -77,6 +78,8 @@ function Clumsy(canvas){
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
         self.ctx.restore();
     }
+
+    self.clear = self.clean;
 
     self.padding = function(p0, p1, p2, p3){
         if(p1 === undefined){
@@ -160,7 +163,7 @@ function Clumsy(canvas){
                 continue;
             }
 
-            if(isSet(f) && isSet(f.x) && isSet(f.y)){
+            if(f && isSet(f.x) && isSet(f.y)){
                 result.push(f);
             }
         }
@@ -225,7 +228,7 @@ function Clumsy(canvas){
             var p1 = replottedLine[l];
 
             var dir = { x: p1.x - p0.x, y: p1.y - p0.y};
-            dir_length = Math.sqrt(dir.x*dir.x+dir.y*dir.y);
+            var dir_length = Math.sqrt(dir.x*dir.x+dir.y*dir.y);
             last.direction = {x: dir.x / dir_length, y: dir.y / dir_length};
         };
 
@@ -241,12 +244,16 @@ function Clumsy(canvas){
         for(var i = 0; i < line.length; i++){
             var point = line[i];
 
-            result.push({
+            var rescaled = {
                 x: (point.x - self.range_left) * scale_horizontal  + self.padding_left,
-                y: self.canvas.height - ((point.y - self.range_bottom) * scale_vertical  + self.padding_bottom),
-                mark: point.mark,
-                normal: point.normal
-            });
+                y: self.canvas.height - ((point.y - self.range_bottom) * scale_vertical  + self.padding_bottom)
+            };
+
+            if(point.mark !== undefined) rescaled.mark = point.mark;
+            if(point.normal !== undefined) rescaled.normal = point.normal;
+            if(point.tick_size !== undefined) rescaled.tick_size = point.tick_size;
+
+            result.push(rescaled);
         };
         return result;
     };
@@ -258,9 +265,17 @@ function Clumsy(canvas){
         var accuracy = 0.25;
 
         if(line.length < 2) return [];
-        var replottedLine = [];
 
-        var beginning = line[0];
+        function copyPoint(point){
+            var copy = {x: point.x, y: point.y};
+            if(point.mark !== undefined) copy.mark = point.mark;
+            if(point.normal !== undefined) copy.normal = point.normal;
+            if(point.tick_size !== undefined) copy.tick_size = point.tick_size;
+            return copy;
+        }
+
+        var replottedLine = [];
+        var beginning = copyPoint(line[0]);
         replottedLine.push(beginning);
 
         for(var i = 1; i < line.length; i++){
@@ -270,8 +285,9 @@ function Clumsy(canvas){
             var d = Math.sqrt(dx*dx+dy*dy);
 
             if(point.mark !== undefined){
-                replottedLine.push(point);
-                beginning = point;
+                var marked = copyPoint(point);
+                replottedLine.push(marked);
+                beginning = marked;
                 continue;
             }
 
@@ -291,15 +307,16 @@ function Clumsy(canvas){
                 }
             }
 
-            replottedLine.push(point);
-            beginning = point;
-        };
+            var copied = copyPoint(point);
+            replottedLine.push(copied);
+            beginning = copied;
+        }
 
-        for(var i = 1; i < replottedLine.length; i++){
-            var point = replottedLine[i];
-            replottedLine[i].x = point.x + radius * (self.random() - 0.5);
-            replottedLine[i].y = point.y + radius * (self.random() - 0.5);
-        };
+        for(var k = 1; k < replottedLine.length; k++){
+            var plotted = replottedLine[k];
+            plotted.x = plotted.x + radius * (self.random() - 0.5);
+            plotted.y = plotted.y + radius * (self.random() - 0.5);
+        }
 
         return replottedLine;
     };
@@ -342,7 +359,7 @@ function Clumsy(canvas){
         if(axis === 'x' || axis === '+x') dir = {x: 1, y: 0};
         if(axis === 'y' || axis === '+y') dir = {x: 0, y: 1};
         if(axis === '-x') dir = {x: -1, y: 0};
-        if(axis === '-y') dir = {x: -0, y: 1};
+        if(axis === '-y') dir = {x: 0, y: -1};
 
         dir = {
             x: dir.x / Math.sqrt(dir.x*dir.x+dir.y*dir.y),
@@ -449,7 +466,7 @@ function Clumsy(canvas){
             return m_w;
         }
         m_w = i;
-        m_z = 987654321;;
+        m_z = 987654321;
     }
 
     // Returns number between 0 (inclusive) and 1.0 (exclusive),
@@ -458,12 +475,15 @@ function Clumsy(canvas){
         m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
         m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
         var result = ((m_z << 16) + m_w) & mask;
+        // Bitwise operators in JavaScript return a signed 32-bit integer.
+        // Dividing that by 2^32 yields [-0.5, 0.5). Adding 0.5 maps the
+        // value back onto [0, 1) and preserves the historical sequence.
         result /= 4294967296;
         return result + 0.5;
     }
 
     self.adjustLimits = function(start, end){
-        if(start === end) { return [0, 0]; };
+        if(start === end) { return {limits: [start, end], step: 1}; }
         var d = Math.abs(end - start) / 10;
         var p = Math.floor(Math.log(d) / Math.log(10));
         var step = Math.pow(10, p);

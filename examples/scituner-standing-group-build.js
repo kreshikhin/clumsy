@@ -1,5 +1,5 @@
 
-var Canvas = require('canvas');
+var createCanvas = require('canvas').createCanvas;
 var GIFEncoder = require('gifencoder');
 var path = require('path');
 var fs = require('fs');
@@ -9,7 +9,7 @@ var helpers = require('../helpers');
 
 var Draw = require('./scituner-standing-group.js');
 
-var canvas = new Canvas(800, 600);
+var canvas = createCanvas(800, 600);
 var clumsy = new Clumsy(canvas);
 
 var encoder = helpers.prepareEncoder(GIFEncoder, canvas);

@@ -1,14 +1,23 @@
 {
   "name": "clumsy",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "draws graphics and figures in xkcd style",
   "main": "clumsy.js",
+  "exports": {
+    ".": "./clumsy.js",
+    "./helpers": "./helpers/index.js"
+  },
+  "files": [
+    "clumsy.js",
+    "helpers",
+    "examples"
+  ],
   "scripts": {
-    "test": "mocha test"
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kreshikhin/clumsy.git"
+    "url": "git+https://github.com/kreshikhin/clumsy.git"
   },
   "keywords": [
     "figures",
@@ -23,16 +32,12 @@
     "xkcd"
   ],
   "author": "Denis Kreshikhin",
-  "public": true,
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kreshikhin/clumsy/issues"
   },
   "homepage": "https://github.com/kreshikhin/clumsy#readme",
-  "dependencies": {
-    "lodash": "*"
-  },
-  "devDependencies": {
-    "mocha": "*"
+  "engines": {
+    "node": ">=18"
   }
 }

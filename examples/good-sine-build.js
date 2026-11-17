@@ -1,11 +1,11 @@
 
-var Canvas = require('canvas');
+var createCanvas = require('canvas').createCanvas;
 var Clumsy = require('../clumsy');
 var helpers = require('../helpers');
 var fs = require('fs');
 var path = require('path');
 
-var canvas = new Canvas(800, 600);
+var canvas = createCanvas(800, 600);
 var clumsy = new Clumsy(canvas);
 
 clumsy.padding(50);
@@ -23,4 +23,4 @@ clumsy.fillTextAtCenter('График со сглаживанием', clumsy.can
 
 var name = helpers.takePngName();
 var out = fs.createWriteStream(path.join('./', name));
-canvas.pngStream().pipe(out);
+canvas.createPNGStream().pipe(out);

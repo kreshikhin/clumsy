@@ -3,7 +3,7 @@
 
   [![NPM Version][npm-image]][npm-url]
   [![NPM Downloads][downloads-image]][downloads-url]
-  [![Build Status][travis-image]][travis-url]
+  [![CI][ci-image]][ci-url]
 
 
 Clumsy.js is a library for creating math figures on HTMLCanvas in XKCD style.
@@ -48,20 +48,16 @@ $ npm install canvas gifencoder
 <a name="preparing" />
 ## Preparing for drawing
 
- It needs to create Canvas before drawing and pass this canvas to constructor of object Clumsy. By default clumsy object have padding in 100px and ranges [-1, 1] in both directions. This can be changed by special methods:
+ Create a canvas and pass it to the Clumsy constructor. Padding starts at 0. The default range maps the canvas itself: x runs from 0 to the canvas width and y runs from 0 to the canvas height, with the origin at the bottom left. Set padding and range before drawing.
 
 ```js
-// Adds canvas module from npm repository for example
-var Canvas = require('canvas');
+// Optional Node.js canvas. In a browser, use a <canvas> element instead.
+var createCanvas = require('canvas').createCanvas;
 
-// Adds this module
-var clumsy = require('clumsy');
-
-// And some helpers for interaction with canvas and gifencoder modules
+var Clumsy = require('clumsy');
 var helpers = require('clumsy/helpers');
 
-// Inits objects
-var canvas = new Canvas(800, 600)
+var canvas = createCanvas(800, 600);
 var clumsy = new Clumsy(canvas);
 
 // Sets padding and ranges before drawing
@@ -75,11 +71,11 @@ clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 Pass arrays with points to method draw. Each point must consider x and y field, e.g. {x: 0, y: 0} - begin coordinate system.
 
 ```js
-var Canvas = require('canvas');
-var clumsy = require('clumsy');
+var createCanvas = require('canvas').createCanvas;
+var Clumsy = require('clumsy');
 var helpers = require('clumsy/helpers');
 
-var canvas = new Canvas(800, 600)
+var canvas = createCanvas(800, 600);
 var clumsy = new Clumsy(canvas);
 
 clumsy.padding(50);
@@ -98,15 +94,15 @@ The result:
 ![sine](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
 
-<a name="axis-and-titles" />
+<a name="axis-and-title" />
 ## Drawing a figure with scaled axis and title
 
 ```javascript
-var Canvas = require('canvas');
+var createCanvas = require('canvas').createCanvas;
 var Clumsy = require('clumsy');
 var helpers = require('clumsy/helpers');
 
-var canvas = new Canvas(800, 600)
+var canvas = createCanvas(800, 600);
 var clumsy = new Clumsy(canvas);
 
 clumsy.font('24px VoronovFont');
@@ -132,7 +128,7 @@ The result:
 ![axis](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
 
-<a name="#animation" />
+<a name="animation" />
 ## Animation
 
 This module also can be used for animation of figure. The best way is prepare a separate script with drawing function.
@@ -181,7 +177,7 @@ Preview script for browser:
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>spiral</title>
-<script src="https://rawgit.com/kreshikhin/clumsy/master/clumsy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kreshikhin/clumsy@master/clumsy.js"></script>
 <link rel="stylesheet" href="http://webfonts.ru/import/voronov.css"></link>
 <canvas id="canvas" width=600 height=600>
 <script type="text/javascript" src="spiral.js"></script>
@@ -194,7 +190,7 @@ Preview script for browser:
     setInterval(function(){
         clumsy.seed(123);
 
-        clumsy.clear('white');
+        clumsy.clean('white');
         Spiral(clumsy, phase);
 
         phase += Math.PI / 10;
@@ -206,7 +202,7 @@ Building script for node.js:
 
 ```js
 
-var Canvas = require('canvas');
+var createCanvas = require('canvas').createCanvas;
 var GIFEncoder = require('gifencoder');
 var path = require('path');
 var fs = require('fs');
@@ -216,7 +212,7 @@ var helpers = require('clumsy/helpers');
 
 var Spiral = require('./spiral.js');
 
-var canvas = new Canvas(600, 600);
+var canvas = createCanvas(600, 600);
 var clumsy = new Clumsy(canvas);
 clumsy.font('24px VoronovFont');
 
@@ -228,7 +224,7 @@ encoder.start();
 for(var i = 0; i < n; i++){
     clumsy.seed(123);
 
-    clumsy.clear('white');
+    clumsy.clean('white');
     Spiral(clumsy, phase);
 
     phase += 2 * Math.PI / n;
@@ -299,6 +295,8 @@ Updates the background color (if argument is not undefined) and cleans the canva
 clumsy.clean();
 ```
 
+`clear(color)` is an alias of `clean(color)`.
+
 <a name="draw" />
 ### draw(curve)
 
@@ -312,15 +310,15 @@ clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
 ```
 
 <a name="fillText" />
-### fillTextAtCenter(x, y, text)
+### fillTextAtCenter(text, x, y)
 
-Draws text at center (x, y).
+Draws text centered horizontally around x. y is the text baseline.
 
-* x, y - coordinates of text center
 * text - a text for drawing
+* x, y - horizontal center and baseline
 
 ```js
-clumsy.fillTextAtCenter(100, 100, "Hello World!");
+clumsy.fillTextAtCenter("Hello World!", 100, 100);
 ```
 <a name="overdraw" />
 ### overdraw(curve)
@@ -330,27 +328,27 @@ Draws a curve with clearing canvas under the curve by background color.
 * `curve` is [{x: x0, y: y0}, ... {x: xn-1, yn-1}]
 
 ```js
-// Draws line from (0,0) to (1,1)
-clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
-// Overdraws line from (0,1) to (0,1)
-clumsy.draw([{x: 1, y:0}, {x: 0, y:1}]);
+// Draws a line from (0, 0) to (1, 1).
+clumsy.draw([{x: 0, y: 0}, {x: 1, y: 1}]);
+// Overdraws a line from (1, 0) to (0, 1).
+clumsy.overdraw([{x: 1, y: 0}, {x: 0, y: 1}]);
 ```
 
 <a name="padding" />
 ### padding(size)
-### padding(vertical, horizontal)
+### padding(horizontal, vertical)
 ### padding(left, right, bottom, top)
 
 Sets paddings from the edges of the canvas.
 
 * `size` - size of all paddings
-* `veritcal`, `horizontal` - vertical and horizontal paddings
-* `left`, `right`, `bottom`, `top` - vertical and horizontal paddings
+* `horizontal`, `vertical` - left/right and bottom/top paddings
+* `left`, `right`, `bottom`, `top` - padding of each edge
 
 ```js
-// Sets all padding in 100px
+// Sets every padding to 100px
 clumsy.padding(100);
-// Sets vertical paddings are 100px and horizontal are 200px
+// Sets horizontal padding to 100px and vertical padding to 200px
 clumsy.padding(100, 200);
 // Sets left, right, bottom and top paddings
 clumsy.padding(50, 100, 150, 200);
@@ -358,7 +356,7 @@ clumsy.padding(50, 100, 150, 200);
 
 <a name="range" />
 ### range(start, end)
-### range(start0, end0, start1, start1)
+### range(start0, end0, start1, end1)
 
 Sets ranges of the coordinate system.
 
@@ -402,6 +400,26 @@ clumsy.font('12px Arial');
 clumsy.seed(12345);
 ```
 
+## Development
+
+The package has no runtime dependencies. `canvas` and `gifencoder` are optional and are only needed for the Node.js examples.
+
+```shell
+npm test
+```
+
+GitHub Actions runs the tests on Node.js 22, 24, and 26.
+
+## Changes in 1.2.0
+
+- Removed the unused `lodash` dependency. Installs no longer pull in a wildcard dependency tree.
+- Replaced Mocha with the built-in Node.js test runner.
+- Replaced Travis CI with GitHub Actions.
+- `clear` is an alias of `clean`.
+- Drawing no longer changes the points you pass in, so `overdraw` traces the same curve twice.
+- `axis('-y')` points along negative Y. Tick size is preserved when a curve is scaled.
+- Node.js examples use `createCanvas` and `createPNGStream` from current `canvas`.
+
 ## License
 
   [MIT](LICENSE)
@@ -410,5 +428,5 @@ clumsy.seed(12345);
 [npm-url]: https://npmjs.org/package/clumsy
 [downloads-image]: https://img.shields.io/npm/dm/clumsy.svg
 [downloads-url]: https://npmjs.org/package/clumsy
-[travis-image]: https://img.shields.io/travis/kreshikhin/clumsy/master.svg
-[travis-url]: https://travis-ci.org/kreshikhin/clumsy
+[ci-image]: https://github.com/kreshikhin/clumsy/actions/workflows/ci.yml/badge.svg
+[ci-url]: https://github.com/kreshikhin/clumsy/actions/workflows/ci.yml

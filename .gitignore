@@ -1,8 +1,9 @@
 node_modules
 *.png
-todo.txt
-.DS_store
-*.log
 *.gif
-!readme-*.png
-!spiral.gif
+*.log
+todo.txt
+.DS_Store
+.DS_store
+!examples/readme-*.png
+!examples/spiral.gif
