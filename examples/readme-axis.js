@@ -8,6 +8,7 @@ var clumsy = new Clumsy(canvas);
 clumsy.font('24px VoronovFont');
 clumsy.padding(50);
 clumsy.range(0, 7, -2, 2);
+clumsy.clean('white');
 clumsy.lineWidth(2);
 
 clumsy.axis('x', 0, 7, 0.5);

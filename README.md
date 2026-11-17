@@ -6,15 +6,19 @@
   [![CI][ci-image]][ci-url]
 
 
-Clumsy.js is a library for creating math figures on HTMLCanvas in XKCD style.
-
-This library can be used with Node.js libraries `canvas` and `gifencoder`:
+Draw math figures on a canvas in an XKCD style. The same drawing script runs in a browser and in Node.js.
 
 ```shell
-$ npm install canvas gifencoder
+npm install clumsy
 ```
 
-![readme-intro](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-intro.png)
+Rendering to PNG or GIF in Node.js also needs [`canvas`](https://www.npmjs.com/package/canvas) and [`gifencoder`](https://www.npmjs.com/package/gifencoder):
+
+```shell
+npm install canvas gifencoder
+```
+
+![Sine and cosine drawn in an XKCD style](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-intro.png)
 
 ## Contents
 
@@ -80,6 +84,7 @@ var clumsy = new Clumsy(canvas);
 
 clumsy.padding(50);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
+clumsy.clean('white');
 clumsy.color('red');
 clumsy.lineWidth(2);
 
@@ -91,7 +96,7 @@ helpers.saveAsPng(clumsy); // save as png of same name
 
 The result:
 
-![sine](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-sine.png)
+![A hand-drawn sine wave](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
 
 <a name="axis-and-title" />
@@ -108,6 +113,7 @@ var clumsy = new Clumsy(canvas);
 clumsy.font('24px VoronovFont');
 clumsy.padding(50);
 clumsy.range(0, 7, -2, 2);
+clumsy.clean('white');
 clumsy.lineWidth(2);
 
 clumsy.axis('x', 0, 7, 0.5);
@@ -125,7 +131,7 @@ helpers.saveAsPng(clumsy);
 
 The result:
 
-![axis](https://raw.github.com/kreshikhin/clumsy/master/examples/readme-axis.png)
+![A sine wave with hand-drawn axes and a title](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
 
 <a name="animation" />
@@ -236,7 +242,7 @@ encoder.finish();
 
 The result:
 
-![spiral](https://raw.github.com/kreshikhin/clumsy/master/examples/spiral.gif)
+![An animated hand-drawn spiral](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/spiral.gif)
 
 
 ## API

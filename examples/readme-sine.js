@@ -7,6 +7,7 @@ var clumsy = new Clumsy(canvas);
 
 clumsy.padding(50);
 clumsy.range(0, 7, -1.5, 1.5);
+clumsy.clean('white');
 
 
 var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);

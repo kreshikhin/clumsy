@@ -1,7 +1,7 @@
 {
   "name": "clumsy",
   "version": "1.2.0",
-  "description": "draws graphics and figures in xkcd style",
+  "description": "Draw math figures on canvas in an XKCD style",
   "main": "clumsy.js",
   "exports": {
     ".": "./clumsy.js",
@@ -31,7 +31,7 @@
     "gif",
     "xkcd"
   ],
-  "author": "Denis Kreshikhin",
+  "author": "Denis Kreshikhin (https://github.com/kreshikhin)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kreshikhin/clumsy/issues"
