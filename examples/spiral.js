@@ -23,7 +23,7 @@ function Spiral(clumsy, phase){
     clumsy.color('red');
     clumsy.draw(spiral);
 
-    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 30);
+    clumsy.fillTextAtCenter('Spiral', clumsy.canvas.width/2, 30);
 }
 
 if(typeof module != 'undefined' && module.exports){

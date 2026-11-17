@@ -25,7 +25,7 @@ function StandingPhase(clumsy, shift){
     clumsy.color('red');
     clumsy.draw(wave);
 
-    clumsy.fillTextAtCenter("Стоячая волна, Vф = 0", canvas.width/2, 50);
+    clumsy.fillTextAtCenter("Standing wave, Vph = 0", canvas.width/2, 50);
     clumsy.fillText("x(t)", 60, 60);
     clumsy.fillText("t", 740, 330);
 }

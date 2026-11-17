@@ -19,6 +19,6 @@ var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
 clumsy.draw(sine);
 
 
-clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
+clumsy.fillTextAtCenter('Sinus', clumsy.canvas.width/2, 50);
 
 helpers.saveAsPng(clumsy);

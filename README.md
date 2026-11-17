@@ -49,7 +49,7 @@ npm install canvas gifencoder
 
   * [License](#license)
 
-<a name="preparing" />
+<a name="preparing"></a>
 ## Preparing for drawing
 
  Create a canvas and pass it to the Clumsy constructor. Padding starts at 0. The default range maps the canvas itself: x runs from 0 to the canvas width and y runs from 0 to the canvas height, with the origin at the bottom left. Set padding and range before drawing.
@@ -69,7 +69,7 @@ clumsy.padding(50);
 clumsy.range(0, 2*Math.PI, -1.5, 1.5);
 ```
 
-<a name="drawing" />
+<a name="drawing"></a>
 ## Drawing a figure
 
 Pass arrays with points to method draw. Each point must consider x and y field, e.g. {x: 0, y: 0} - begin coordinate system.
@@ -99,7 +99,7 @@ The result:
 ![A hand-drawn sine wave](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-sine.png)
 
 
-<a name="axis-and-title" />
+<a name="axis-and-title"></a>
 ## Drawing a figure with scaled axis and title
 
 ```javascript
@@ -123,7 +123,7 @@ clumsy.color('red');
 var sine = clumsy.tabulate(0, 2*Math.PI, 0.01, Math.sin);
 clumsy.draw(sine);
 
-clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
+clumsy.fillTextAtCenter('Sinus', clumsy.canvas.width/2, 50);
 
 helpers.saveAsPng(clumsy);
 
@@ -134,7 +134,7 @@ The result:
 ![A sine wave with hand-drawn axes and a title](https://raw.githubusercontent.com/kreshikhin/clumsy/master/examples/readme-axis.png)
 
 
-<a name="animation" />
+<a name="animation"></a>
 ## Animation
 
 This module also can be used for animation of figure. The best way is prepare a separate script with drawing function.
@@ -168,7 +168,7 @@ function Spiral(clumsy, phase){
     clumsy.color('red');
     clumsy.draw(spiral);
 
-    clumsy.fillTextAtCenter('Спираль', clumsy.canvas.width/2, 30);
+    clumsy.fillTextAtCenter('Spiral', clumsy.canvas.width/2, 30);
 }
 
 if(typeof module != 'undefined' && module.exports){
@@ -247,7 +247,7 @@ The result:
 
 ## API
 
-<a name="newclumsy" />
+<a name="newclumsy"></a>
 ### new Clumsy(canvas)
 
 Creates new clumsy object.
@@ -258,7 +258,7 @@ Creates new clumsy object.
 var clumsy = new Clumsy(canvas);
 ```
 
-<a name="axis" />
+<a name="axis"></a>
 ### axis(axis, start, end, [step | options]);
 Draws axis.
 
@@ -291,7 +291,7 @@ clumsy.axis('x', -1, 1, {
 });
 ```
 
-<a name="clean" />
+<a name="clean"></a>
 ### clean([color])
 Updates the background color (if argument is not undefined) and cleans the canvas.
 
@@ -303,7 +303,7 @@ clumsy.clean();
 
 `clear(color)` is an alias of `clean(color)`.
 
-<a name="draw" />
+<a name="draw"></a>
 ### draw(curve)
 
 Draws a curve by array of point in `{x: x, y: y}` format.
@@ -315,7 +315,7 @@ Draws a curve by array of point in `{x: x, y: y}` format.
 clumsy.draw([{x: 0, y:0}, {x: 1, y:1}]);
 ```
 
-<a name="fillText" />
+<a name="fillText"></a>
 ### fillTextAtCenter(text, x, y)
 
 Draws text centered horizontally around x. y is the text baseline.
@@ -326,7 +326,7 @@ Draws text centered horizontally around x. y is the text baseline.
 ```js
 clumsy.fillTextAtCenter("Hello World!", 100, 100);
 ```
-<a name="overdraw" />
+<a name="overdraw"></a>
 ### overdraw(curve)
 
 Draws a curve with clearing canvas under the curve by background color.
@@ -340,7 +340,7 @@ clumsy.draw([{x: 0, y: 0}, {x: 1, y: 1}]);
 clumsy.overdraw([{x: 1, y: 0}, {x: 0, y: 1}]);
 ```
 
-<a name="padding" />
+<a name="padding"></a>
 ### padding(size)
 ### padding(horizontal, vertical)
 ### padding(left, right, bottom, top)
@@ -360,7 +360,7 @@ clumsy.padding(100, 200);
 clumsy.padding(50, 100, 150, 200);
 ```
 
-<a name="range" />
+<a name="range"></a>
 ### range(start, end)
 ### range(start0, end0, start1, end1)
 
@@ -373,7 +373,7 @@ clumsy.range(-10, 10);
 clumsy.range(-10, 10, -20, 20);
 ```
 
-<a name="seed" />
+<a name="seed"></a>
 ### seed([seed])
 Sets the seed of generator of pseudo random numbers.
 

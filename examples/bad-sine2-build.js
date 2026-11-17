@@ -32,7 +32,7 @@ for(var i=0; i < sine.length; i++){
 };
 clumsy.ctx.stroke();
 
-clumsy.fillTextAtCenter('Без сглаживания', clumsy.canvas.width/2, 50);
+clumsy.fillTextAtCenter('No smoothing', clumsy.canvas.width/2, 50);
 
 var name = helpers.takePngName();
 var out = fs.createWriteStream(path.join('./', name));

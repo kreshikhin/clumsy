@@ -24,7 +24,7 @@ clumsy.overdraw(sine);
 clumsy.color('black');
 clumsy.axis('y', -1.5, 1.5, 0.5);
 
-clumsy.fillTextAtCenter('График со сглаживанием', clumsy.canvas.width/2, 50);
+clumsy.fillTextAtCenter('Smoothed curve', clumsy.canvas.width/2, 50);
 
 var name = helpers.takePngName();
 var out = fs.createWriteStream(path.join('./', name));

@@ -20,7 +20,7 @@ var sine = clumsy.tabulate(0, 2*Math.PI, 0.1, Math.sin);
 
 clumsy.color('black');
 clumsy.draw(sine);
-clumsy.fillTextAtCenter('Неправильный шаг', clumsy.canvas.width/2, 50);
+clumsy.fillTextAtCenter('Wrong step', clumsy.canvas.width/2, 50);
 
 var name = helpers.takePngName();
 var out = fs.createWriteStream(path.join('./', name));

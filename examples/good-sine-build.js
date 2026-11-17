@@ -19,7 +19,7 @@ clumsy.lineWidth(2);
 var sine = clumsy.tabulate(0, 2*Math.PI, 0.25, Math.sin);
 clumsy.draw(sine);
 
-clumsy.fillTextAtCenter('График со сглаживанием', clumsy.canvas.width/2, 50);
+clumsy.fillTextAtCenter('Smoothed curve', clumsy.canvas.width/2, 50);
 
 var name = helpers.takePngName();
 var out = fs.createWriteStream(path.join('./', name));

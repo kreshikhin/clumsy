@@ -10,7 +10,7 @@ function Sine(clumsy){
     clumsy.axis('x', 0, 7, 0.5);
     clumsy.axis('y', -2, 2, 0.5);
 
-    clumsy.fillTextAtCenter('Синус', clumsy.canvas.width/2, 50);
+    clumsy.fillTextAtCenter('Sinus', clumsy.canvas.width/2, 50);
 }
 
 if(typeof module != 'undefined' && module.exports){
